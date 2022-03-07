@@ -1,34 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# cut0-blog
 
-## Getting Started
+## 概要
 
-First, run the development server:
+なんとなく自分のブログサイト欲しくなったのでつくりました。
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 環境
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- node と yarn が使えれば問題ないと思います。
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 使用方法
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+詳しくは package.json を参照してください。
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `yarn dev` : Next.js を開発モードで起動します。
+- `yarn build` : 本番用にビルドします。
+- `yarn lint` : eslint と prettier の lint を走らせます。
+- `yarn format` : eslint と prettier の format を走らせます。
+- `yarn test` : Jest によるテストを実行します。開発では各ビジネスロジックに関するテストを書く予定です。
 
-## Learn More
+## 使用ライブラリ
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js : SSG や Vercel との相性を考えて採用しました。画像の最適化という点で Gatsby.js を採用しようと考えましたが、今回は下記理由から Next.js を採用しました。
+  - Gatsby.js の shadowing により、コードがブラックボックス化することを防ぐため(shadowing 自体は良い機能だと思いますが、今回はデザインも１から設計するため、あまり効果的でないと感じました。)
+  - Next.js がシンプルなフレームワークであるから。(SSR などを除き基本的に Gatsby.js は Next.js が行っていることはできますが、どの機能も今回のケースで絶対に必要なものではないため、よりシンプルな Next.js を採用しました。)
+- TypeScript : 可能な限り型安全に開発したいので採用しました。
+- Vanilla Extract : 正直、使ってみたいから採用しました。採用することで以下の利点・欠点があると考えています。
+  - 利点
+    - ビルド時に CSS が生成されるため、CSS in JS よりパフォーマンスに期待ができる。
+    - `*.css.ts`にコードを書くため、比較的型安全に CSS を記載できる。
+    - 移行が比較的簡単(tailwind のようなライブラリ特有の記法が少く、生の CSS に近しいため他のライブラリに移行する際に楽だと感じました。)
+  - 欠点
+    - (好みであるが)`*.css.ts`にファイルが分割されるため、コンポーネント内にスタイルが書けない。
+    - 最終的に className にスタイルを入れることになるため、的確な命名が必要。(この辺は Vanilla Extract の欠点というより CSS のつらみかもしれない)
+- SWR : サーバーからのレスポンスをステートとして管理し、キャッスとして保持できるため採用しました。(わざわざ Redux とか Recoil を使いたくないため)
+- MSW : HTTP の通信をモックするのに採用しました。テストコードで役に立つといいなと思います。
+- microcms-js-sdk : microcms でブログ投稿を管理しているため採用しました。一通り内部のコードを読みましたが、非常にシンプルで使いやすそうです。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## CI/CD
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- GitHub Actions : master マージ時に lint や test を行ってもらいます。
+- Vercel : とにかく簡単にデプロイできる上に、プレビュー用のリンクも生成してもらえるため採用しました。
 
-## Deploy on Vercel
+## 今後の展望
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- モノレポ運用に変更し、このレポジトリを api-client と app に分割するかもしれません。
+- このプロジェクトが肥大化した際には StoryBook を導入しようと考えています。
+- Vanilla Extract を StyleX に置き換えるかもしれません。まだ、リリースされていないのでなんとも言えませんが
