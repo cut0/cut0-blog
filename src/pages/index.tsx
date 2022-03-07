@@ -1,8 +1,8 @@
 import type { NextPage, GetStaticPropsResult } from "next";
-import { getTagList } from "../api-client";
+import { getTagList, TagResponse } from "../../api-client";
 
 type HomeProps = {
-  tags: Tag[];
+  tags: TagResponse[];
 };
 
 export const getStaticProps = async (): Promise<
