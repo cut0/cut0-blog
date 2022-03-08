@@ -1,4 +1,4 @@
-import { MicroCMSQueries, GetRequest } from "microcms-js-sdk";
+import { MicroCMSQueries } from "microcms-js-sdk";
 
 export type MicroCMSGETListModel<T> = {
   key: string;
