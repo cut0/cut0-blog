@@ -5,10 +5,11 @@ import "sanitize.css/typography.css";
 import type { AppProps } from "next/app";
 import { initializeMock } from "../../mocks";
 
+if (process.env.NODE_ENV === "development") {
+  initializeMock();
+}
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  if (process.env.NODE_ENV === "development") {
-    initializeMock();
-  }
   return <Component {...pageProps} />;
 };
 
