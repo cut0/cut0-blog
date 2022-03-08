@@ -6,13 +6,11 @@ import {
 } from "../../api-client";
 import { formatMicroCMSContent } from "../utils/microCMS";
 
-const testdata: BlogContentResponse[] = [
-  {
-    id: "1",
-    description:
-      "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
-    title:
-      "titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle",
+const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
+  return {
+    id: String(index),
+    description: `${index} descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription`,
+    title: `${index} titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle`,
     tags: [
       {
         id: "1",
@@ -54,8 +52,8 @@ const testdata: BlogContentResponse[] = [
     updatedAt: "",
     publishedAt: "2022-12-26",
     revisedAt: "",
-  },
-];
+  };
+});
 
 const mockGetBlogContentList: ResponseResolver<
   MockedRequest,
