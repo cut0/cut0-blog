@@ -1,5 +1,6 @@
 import { rest, MockedRequest, ResponseResolver, restContext } from "msw";
 import { getTag, getTagList, TagResponse } from "../../api-client";
+import { formatMicroCMSContent } from "../utils/microCMS";
 
 const testdata: TagResponse[] = [
   {
@@ -29,19 +30,43 @@ const testdata: TagResponse[] = [
 ];
 
 const mockGetTagList: ResponseResolver<MockedRequest, typeof restContext> = (
-  _,
+  req,
   res,
   ctx,
 ) => {
-  return res(ctx.status(200), ctx.json(testdata));
+  const offset = req.url.searchParams.get("offset");
+  const limit = req.url.searchParams.get("limit");
+
+  return res(
+    ctx.status(200),
+    ctx.json(
+      formatMicroCMSContent(testdata, {
+        offset: offset ? Number(offset) : undefined,
+        limit: limit ? Number(limit) : undefined,
+      }),
+    ),
+  );
 };
 
 const mockGetTag: ResponseResolver<MockedRequest, typeof restContext> = (
-  _,
+  req,
   res,
   ctx,
 ) => {
-  return res(ctx.status(200), ctx.json(testdata[0]));
+  const id = req.url.searchParams.get("id");
+  const offset = req.url.searchParams.get("offset");
+  const limit = req.url.searchParams.get("limit");
+
+  return res(
+    ctx.status(200),
+    ctx.json(
+      formatMicroCMSContent(testdata, {
+        id: id ? id : undefined,
+        offset: offset ? Number(offset) : undefined,
+        limit: limit ? Number(limit) : undefined,
+      }),
+    ),
+  );
 };
 
 export const tagHandlers = [

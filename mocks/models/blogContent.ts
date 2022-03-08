@@ -1,9 +1,11 @@
+import { off } from "process";
 import { rest, MockedRequest, ResponseResolver, restContext } from "msw";
 import {
   getBlogContent,
   getBlogContentList,
   BlogContentResponse,
 } from "../../api-client";
+import { formatMicroCMSContent } from "../utils/microCMS";
 
 const testdata: BlogContentResponse[] = [
   {
@@ -59,15 +61,39 @@ const testdata: BlogContentResponse[] = [
 const mockGetBlogContentList: ResponseResolver<
   MockedRequest,
   typeof restContext
-> = (_, res, ctx) => {
-  return res(ctx.status(200), ctx.json(testdata));
+> = (req, res, ctx) => {
+  const offset = req.url.searchParams.get("offset");
+  const limit = req.url.searchParams.get("limit");
+
+  return res(
+    ctx.status(200),
+    ctx.json(
+      formatMicroCMSContent(testdata, {
+        offset: offset ? Number(offset) : undefined,
+        limit: limit ? Number(limit) : undefined,
+      }),
+    ),
+  );
 };
 
 const mockGetBlogContent: ResponseResolver<
   MockedRequest,
   typeof restContext
-> = (_, res, ctx) => {
-  return res(ctx.status(200), ctx.json(testdata[0]));
+> = (req, res, ctx) => {
+  const id = req.url.searchParams.get("id");
+  const offset = req.url.searchParams.get("offset");
+  const limit = req.url.searchParams.get("limit");
+
+  return res(
+    ctx.status(200),
+    ctx.json(
+      formatMicroCMSContent(testdata, {
+        id: id ? id : undefined,
+        offset: offset ? Number(offset) : undefined,
+        limit: limit ? Number(limit) : undefined,
+      }),
+    ),
+  );
 };
 
 export const blogContentHandlers = [
