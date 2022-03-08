@@ -8,7 +8,7 @@ type HomeProps = {
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<HomeProps>
 > => {
-  const tags = await getTagList();
+  const tags = await getTagList.handler();
 
   return {
     props: {
