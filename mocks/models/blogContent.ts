@@ -1,9 +1,5 @@
-import { rest, MockedRequest, ResponseResolver, restContext } from "msw";
-import {
-  getBlogContent,
-  getBlogContentList,
-  BlogContentResponse,
-} from "../../api-client";
+import { MicroCMSQueries } from "microcms-js-sdk";
+import { BlogContentResponse } from "../../api-client";
 import { formatMicroCMSContent } from "../utils/microCMS";
 
 const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
@@ -55,45 +51,19 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
   };
 });
 
-const mockGetBlogContentList: ResponseResolver<
-  MockedRequest,
-  typeof restContext
-> = (req, res, ctx) => {
-  const offset = req.url.searchParams.get("offset");
-  const limit = req.url.searchParams.get("limit");
-
-  return res(
-    ctx.status(200),
-    ctx.json(
-      formatMicroCMSContent(testdata, {
-        offset: offset ? Number(offset) : undefined,
-        limit: limit ? Number(limit) : undefined,
-      }),
-    ),
-  );
+export const mockGetBlogContentList = (queries: MicroCMSQueries) => {
+  const { offset, limit } = queries;
+  return formatMicroCMSContent(testdata, {
+    offset: offset ? Number(offset) : undefined,
+    limit: limit ? Number(limit) : undefined,
+  });
 };
 
-const mockGetBlogContent: ResponseResolver<
-  MockedRequest,
-  typeof restContext
-> = (req, res, ctx) => {
-  const id = req.url.searchParams.get("id");
-  const offset = req.url.searchParams.get("offset");
-  const limit = req.url.searchParams.get("limit");
-
-  return res(
-    ctx.status(200),
-    ctx.json(
-      formatMicroCMSContent(testdata, {
-        id: id ? id : undefined,
-        offset: offset ? Number(offset) : undefined,
-        limit: limit ? Number(limit) : undefined,
-      }),
-    ),
-  );
+export const mockGetBlogContent = (id: string, queries: MicroCMSQueries) => {
+  const { offset, limit } = queries;
+  return formatMicroCMSContent(testdata, {
+    id: id ? id : undefined,
+    offset: offset ? Number(offset) : undefined,
+    limit: limit ? Number(limit) : undefined,
+  })[0];
 };
-
-export const blogContentHandlers = [
-  rest.get(getBlogContentList.key, mockGetBlogContentList),
-  rest.get(getBlogContent.key, mockGetBlogContent),
-];
