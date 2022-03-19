@@ -14,11 +14,9 @@ export const formatMicroCMSContent = (
   if (id) {
     res = res.filter((el) => el.id === id);
   }
-  if (offset) {
-    res = res.splice(0, offset);
-  }
-  if (limit) {
-    res = res.slice(0, limit);
-  }
+  const offsetVal = offset ? offset : 0;
+  const limitVal = limit ? limit : 0;
+  res = res.slice(offsetVal, offsetVal + limitVal);
+
   return res;
 };
