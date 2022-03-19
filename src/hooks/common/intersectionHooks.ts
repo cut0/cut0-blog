@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 export const useIntersection = (
-  ref: React.RefObject<HTMLElement>,
   {
     enable = true,
     once = false,
@@ -15,6 +14,8 @@ export const useIntersection = (
   onIntersection?: () => void,
   onRemoveIntersection?: () => void,
 ) => {
+  const ref = useRef(null);
+
   useEffect(() => {
     if (!enable || ref.current === null) {
       return;
@@ -34,7 +35,5 @@ export const useIntersection = (
     return () => observer.disconnect();
   }, [onIntersection, onRemoveIntersection, enable, once, options, ref]);
 
-  if (!enable) {
-    return true;
-  }
+  return ref;
 };
