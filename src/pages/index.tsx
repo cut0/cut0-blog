@@ -1,8 +1,8 @@
 import type { NextPage, GetStaticPropsResult } from "next";
 import { useRef } from "react";
 import { BlogContentResponse, getBlogContentList } from "../../api-client";
-import { useBlogContentList } from "../features/blogContent";
-import { useIntersection } from "../features/common/intersectionHooks";
+import { useBlogContentList } from "../hooks/blogContent";
+import { useIntersection } from "../hooks/common/intersectionHooks";
 
 type HomeProps = {
   initialBlogContentList: BlogContentResponse[];
