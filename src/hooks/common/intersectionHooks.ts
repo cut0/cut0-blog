@@ -19,7 +19,6 @@ export const useIntersection = (
     if (!enable || ref.current === null) {
       return;
     }
-    console.log(ref.current);
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !!onIntersection) {
