@@ -1,28 +1,45 @@
 import type { NextPage, GetStaticPropsResult } from "next";
-import { getTagList, TagResponse } from "../../api-client";
+import { useRef } from "react";
+import { BlogContentResponse, getBlogContentList } from "../../api-client";
+import { useBlogContentList } from "../features/blogContent";
+import { useIntersection } from "../features/common/intersectionHooks";
 
 type HomeProps = {
-  tags: TagResponse[];
+  initialBlogContentList: BlogContentResponse[];
 };
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<HomeProps>
 > => {
-  const tags = await getTagList.handler({ limit: 1 });
+  const initialBlogContentList = await getBlogContentList.handler({
+    offset: 0,
+    limit: 20,
+  });
 
   return {
     props: {
-      tags,
+      initialBlogContentList,
     },
   };
 };
 
-const Home: NextPage<HomeProps> = ({ tags }) => {
+const Home: NextPage<HomeProps> = ({ initialBlogContentList }) => {
+  const {
+    data: blogContentList,
+    error,
+    loading,
+  } = useBlogContentList(initialBlogContentList);
+
+  const el = useRef(null);
+  useIntersection(el, {}, () => console.log("HELLO"));
   return (
     <>
-      {tags.map((tag) => {
-        return <p key={tag.name}> {tag.name}</p>;
-      })}
+      {loading && <p>ローディング中です</p>}
+      {error && <p>エラーが発生しました</p>}
+      {blogContentList &&
+        blogContentList.map((blogContent) => {
+          return <p key={blogContent.id}> {blogContent.title}</p>;
+        })}
     </>
   );
 };
