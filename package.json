@@ -11,7 +11,8 @@
     "lint:prettier": "prettier --ignore-path .prettierignore  --check '**/*.{js,ts,tsx,css}'",
     "format": "run-s format:eslint format:prettier",
     "format:eslint": "eslint --fix --ext ts,tsx,js .",
-    "format:prettier": "prettier --ignore-path .prettierignore  --write '**/*.{js,ts,tsx,css}'"
+    "format:prettier": "prettier --ignore-path .prettierignore  --write '**/*.{js,ts,tsx,css}'",
+    "test": "jest"
   },
   "dependencies": {
     "@vanilla-extract/babel-plugin": "^1.1.4",
@@ -34,12 +35,8 @@
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "^8.5.0",
     "jest": "^27.5.1",
-    "msw": "^0.38.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "typescript": "4.6.2"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }
