@@ -1,20 +1,42 @@
-import useSWR from "swr";
+import useSWRInfinite from "swr/infinite";
 import { BlogContentResponse, getBlogContentList } from "../../../api-client";
 
-export const useBlogContentList = (initialData: BlogContentResponse[]) => {
-  const { key, handler } = getBlogContentList;
-  const { data, error, mutate } = useSWR(
-    key,
-    handler.bind(undefined, { offset: 0, limit: 20 }),
-    {
-      fallbackData: initialData,
-    },
-  );
+const LIMIT = 20;
+
+const getKey = (
+  pageIndex: number,
+  previousPageData: BlogContentResponse[],
+): [string, number, number] | null => {
+  if (previousPageData && !previousPageData.length) return null;
+  return [getBlogContentList.key, pageIndex, LIMIT];
+};
+
+const fetcher = (a: string, pageIndex: number, limit: number) => {
+  return getBlogContentList.handler({
+    offset: pageIndex * LIMIT,
+    limit,
+  });
+};
+
+export const useBlogContentListInfinite = (
+  initialData: BlogContentResponse[],
+) => {
+  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
+    fallback: initialData,
+  });
+
+  const isLast = data
+    ? data.filter((list) => list.length < LIMIT).length > 0
+    : false;
 
   return {
-    data,
+    blogContentList: data?.flat(),
+    blogContentListSize: size,
+    fetchBlogContentList: () => {
+      if (!isLast) return setSize((pre) => pre + 1);
+    },
+    isLast,
     error,
     loading: !data && !error,
-    fetchBlogContentList: mutate,
   };
 };
