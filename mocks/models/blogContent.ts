@@ -38,7 +38,7 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
         id: "1",
         name: "user name",
         eyecatch: {
-          url: "",
+          url: "https://placehold.jp/150x150.png",
           height: 512,
           width: 512,
         },
@@ -53,7 +53,7 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
     publishedAt: "2022-12-26",
     revisedAt: "",
     eyecatch: {
-      url: "",
+      url: "https://placehold.jp/150x150.png",
       height: 512,
       width: 512,
     },
