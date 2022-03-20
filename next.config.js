@@ -3,9 +3,14 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ["placehold.jp"],
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+    return config;
   },
+  images: { disableStaticImages: true, domains: ["placehold.jp"] },
 };
 
 module.exports = withVanillaExtract(nextConfig);
