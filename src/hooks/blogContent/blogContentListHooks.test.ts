@@ -57,7 +57,9 @@ test("取得成功時", async () => {
 });
 
 test("取得失敗時", async () => {
-  jest.spyOn(getBlogContentList, "handler").mockRejectedValue(new Error());
+  const mock = jest
+    .spyOn(getBlogContentList, "handler")
+    .mockRejectedValue(new Error());
 
   const { result } = renderHook(() => useBlogContentListInfinite([]), {
     wrapper: SwrTestWrapper,
@@ -75,4 +77,33 @@ test("取得失敗時", async () => {
     error: new Error(),
     loading: false,
   });
+
+  mock.mockRestore();
+});
+
+test("エラー発生後のデータ整合性", async () => {
+  const mock = jest
+    .spyOn(getBlogContentList, "handler")
+    .mockRejectedValueOnce(new Error());
+
+  const { result } = renderHook(() => useBlogContentListInfinite([]), {
+    wrapper: SwrTestWrapper,
+  });
+
+  await act(async () => {
+    await result.current.fetchBlogContentList();
+  });
+
+  console.log(result.current.error);
+
+  expect(result.current).toEqual({
+    blogContentList: mockGetBlogContentList({ offset: 0, limit: 40 }),
+    blogContentListSize: 2,
+    fetchBlogContentList: expect.any(Function),
+    isLast: false,
+    error: new Error(),
+    loading: false,
+  });
+
+  mock.mockRestore();
 });
