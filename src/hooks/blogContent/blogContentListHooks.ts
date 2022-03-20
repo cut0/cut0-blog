@@ -11,7 +11,7 @@ const getKey = (
   return [getBlogContentList.key, pageIndex, LIMIT];
 };
 
-const fetcher = (a: string, pageIndex: number, limit: number) => {
+const fetcher = (_: string, pageIndex: number, limit: number) => {
   return getBlogContentList.handler({
     offset: pageIndex * LIMIT,
     limit,
