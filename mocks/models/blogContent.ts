@@ -37,7 +37,11 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
       {
         id: "1",
         name: "user name",
-        eyecatch: "",
+        eyecatch: {
+          url: "",
+          height: 512,
+          width: 512,
+        },
         createdAt: "",
         updatedAt: "",
         publishedAt: "",
@@ -48,6 +52,11 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
     updatedAt: "",
     publishedAt: "2022-12-26",
     revisedAt: "",
+    eyecatch: {
+      url: "",
+      height: 512,
+      width: 512,
+    },
   };
 });
 

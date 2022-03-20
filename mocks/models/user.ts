@@ -6,7 +6,11 @@ const testdata: UserResponse[] = [
   {
     id: "1",
     name: "user name",
-    eyecatch: "",
+    eyecatch: {
+      url: "",
+      height: 512,
+      width: 512,
+    },
     createdAt: "",
     updatedAt: "",
     publishedAt: "",
