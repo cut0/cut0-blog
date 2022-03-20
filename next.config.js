@@ -10,7 +10,10 @@ const nextConfig = {
     });
     return config;
   },
-  images: { disableStaticImages: true, domains: ["placehold.jp"] },
+  images: {
+    disableStaticImages: true,
+    domains: ["placehold.jp", "images.microcms-assets.io"],
+  },
 };
 
 module.exports = withVanillaExtract(nextConfig);
