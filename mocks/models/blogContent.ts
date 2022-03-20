@@ -57,6 +57,7 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
       height: 512,
       width: 512,
     },
+    isPicked: true,
   };
 });
 

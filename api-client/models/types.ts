@@ -14,6 +14,7 @@ export type BlogContentResponse = {
   tags: TagResponse[];
   users: UserResponse[];
   eyecatch: Image;
+  isPicked: boolean;
 } & MicroCMSDefalut;
 
 export type TagResponse = {
