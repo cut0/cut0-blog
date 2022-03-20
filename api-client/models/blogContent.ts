@@ -15,7 +15,7 @@ export const getBlogContentList: MicroCMSGETListModel<BlogContentResponse[]> = {
       return mockGetBlogContentList(queries);
     }
     const data = await client.getList<BlogContentResponse>({
-      endpoint: "blogs",
+      endpoint: "blog-contents",
       queries,
     });
     return data.contents;
