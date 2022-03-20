@@ -94,8 +94,6 @@ test("エラー発生後のデータ整合性", async () => {
     await result.current.fetchBlogContentList();
   });
 
-  console.log(result.current.error);
-
   expect(result.current).toEqual({
     blogContentList: mockGetBlogContentList({ offset: 0, limit: 40 }),
     blogContentListSize: 2,
