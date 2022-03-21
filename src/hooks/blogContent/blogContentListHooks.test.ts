@@ -5,9 +5,12 @@ import { SwrTestWrapper } from "../../components/SwrTestWrapper";
 import { useBlogContentListInfinite } from "./blogContentListHooks";
 
 test("初期状態", async () => {
-  const { result } = renderHook(() => useBlogContentListInfinite([]), {
-    wrapper: SwrTestWrapper,
-  });
+  const { result } = renderHook(
+    () => useBlogContentListInfinite({ category: "recently" }),
+    {
+      wrapper: SwrTestWrapper,
+    },
+  );
 
   expect(result.current).toEqual({
     blogContentList: undefined,
@@ -20,14 +23,17 @@ test("初期状態", async () => {
 });
 
 test("初回レンダリング時", async () => {
-  const { result } = renderHook(() => useBlogContentListInfinite([]), {
-    wrapper: SwrTestWrapper,
-  });
+  const { result } = renderHook(
+    () => useBlogContentListInfinite({ category: "recently" }),
+    {
+      wrapper: SwrTestWrapper,
+    },
+  );
 
   await act(async () => {});
 
   expect(result.current).toEqual({
-    blogContentList: mockGetBlogContentList({ offset: 0, limit: 20 }),
+    blogContentList: mockGetBlogContentList({ offset: 0, limit: 10 }),
     blogContentListSize: 1,
     fetchBlogContentList: expect.any(Function),
     isLast: false,
@@ -37,9 +43,12 @@ test("初回レンダリング時", async () => {
 });
 
 test("取得成功時", async () => {
-  const { result } = renderHook(() => useBlogContentListInfinite([]), {
-    wrapper: SwrTestWrapper,
-  });
+  const { result } = renderHook(
+    () => useBlogContentListInfinite({ category: "recently" }),
+    {
+      wrapper: SwrTestWrapper,
+    },
+  );
 
   await act(async () => {
     await result.current.fetchBlogContentList();
@@ -47,7 +56,7 @@ test("取得成功時", async () => {
   });
 
   expect(result.current).toEqual({
-    blogContentList: mockGetBlogContentList({ offset: 0, limit: 60 }),
+    blogContentList: mockGetBlogContentList({ offset: 0, limit: 30 }),
     blogContentListSize: 3,
     fetchBlogContentList: expect.any(Function),
     isLast: false,
@@ -61,9 +70,12 @@ test("取得失敗時", async () => {
     .spyOn(getBlogContentList, "handler")
     .mockRejectedValue(new Error());
 
-  const { result } = renderHook(() => useBlogContentListInfinite([]), {
-    wrapper: SwrTestWrapper,
-  });
+  const { result } = renderHook(
+    () => useBlogContentListInfinite({ category: "recently" }),
+    {
+      wrapper: SwrTestWrapper,
+    },
+  );
 
   await act(async () => {
     await result.current.fetchBlogContentList();
@@ -86,16 +98,19 @@ test("エラー発生後のデータ整合性", async () => {
     .spyOn(getBlogContentList, "handler")
     .mockRejectedValueOnce(new Error());
 
-  const { result } = renderHook(() => useBlogContentListInfinite([]), {
-    wrapper: SwrTestWrapper,
-  });
+  const { result } = renderHook(
+    () => useBlogContentListInfinite({ category: "recently" }),
+    {
+      wrapper: SwrTestWrapper,
+    },
+  );
 
   await act(async () => {
     await result.current.fetchBlogContentList();
   });
 
   expect(result.current).toEqual({
-    blogContentList: mockGetBlogContentList({ offset: 0, limit: 40 }),
+    blogContentList: mockGetBlogContentList({ offset: 0, limit: 20 }),
     blogContentListSize: 2,
     fetchBlogContentList: expect.any(Function),
     isLast: false,

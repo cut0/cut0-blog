@@ -1,28 +1,61 @@
 import useSWRInfinite from "swr/infinite";
 import { BlogContentResponse, getBlogContentList } from "../../../api-client";
 
-const LIMIT = 20;
+const LIMIT = 10;
 
-const getKey = (
-  pageIndex: number,
-  previousPageData: BlogContentResponse[],
-): [string, number, number] | null => {
-  if (previousPageData && !previousPageData.length) return null;
-  return [getBlogContentList.key, pageIndex, LIMIT];
+type FilterOptions = {
+  category: "recently" | "pick-up";
+  tagId?: string;
 };
 
-const fetcher = (_: string, pageIndex: number, limit: number) => {
-  return getBlogContentList.handler({
+const fetcher = (
+  _: string,
+  pageIndex: number,
+  limit: number,
+  { category, tagId }: FilterOptions,
+) => {
+  const defaultQueries = {
     offset: pageIndex * LIMIT,
     limit,
-  });
+  };
+  const filterStrList: string[] = [];
+  if (category === "pick-up") {
+    filterStrList.push("(isPicked[equals]true)");
+  }
+  if (tagId) {
+    filterStrList.push(`(tags[contains]${tagId})`);
+  }
+
+  if (filterStrList.length > 0) {
+    return getBlogContentList.handler({
+      ...defaultQueries,
+      filters: filterStrList.join("[and]"),
+    });
+  }
+  return getBlogContentList.handler(defaultQueries);
+};
+
+const generateGetKey = ({ category, tagId }: FilterOptions) => {
+  const getKey = (
+    pageIndex: number,
+    previousPageData: BlogContentResponse[],
+  ): [string, number, number, FilterOptions] | null => {
+    if (previousPageData && !previousPageData.length) {
+      return null;
+    }
+    return [getBlogContentList.key, pageIndex, LIMIT, { category, tagId }];
+  };
+  return getKey;
 };
 
 export const useBlogContentListInfinite = (
-  initialData: BlogContentResponse[],
+  filterOptions: FilterOptions,
+  initialData?: BlogContentResponse[],
 ) => {
+  const getKey = generateGetKey(filterOptions);
+
   const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
-    fallback: initialData,
+    fallbackData: initialData ? [initialData] : undefined,
   });
 
   const isLast = data
