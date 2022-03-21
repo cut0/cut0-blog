@@ -11,5 +11,8 @@ export const formatMicroCMSContent = <T>(
     .filter((el) => {
       return id ? el.id === id : true;
     })
-    .slice(offsetVal, offsetVal + limitVal);
+    .slice(
+      offset ? offset : undefined,
+      limit ? (offset ? offset + limit : limit) : undefined,
+    );
 };
