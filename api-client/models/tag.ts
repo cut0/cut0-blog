@@ -8,12 +8,6 @@ const GET_TAG_LIST_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getTagList`;
 export const getTagList: MicroCMSGETListModel<TagResponse[]> = {
   key: GET_TAG_LIST_KEY,
   handler: async (queries) => {
-    if (
-      process.env.NODE_ENV === "development" ||
-      process.env.NODE_ENV === "test"
-    ) {
-      return mockGetTagList(queries);
-    }
     const data = await client.getList<TagResponse>({
       endpoint: "tags",
       queries,
@@ -27,12 +21,6 @@ const GET_TAG_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getTag`;
 export const getTag: MicroCMSGETModel<TagResponse> = {
   key: GET_TAG_KEY,
   handler: async (id, queries) => {
-    if (
-      process.env.NODE_ENV === "development" ||
-      process.env.NODE_ENV === "test"
-    ) {
-      return mockGetTag(id, queries);
-    }
     const data = await client.get<TagResponse>({
       endpoint: "tags",
       contentId: id,

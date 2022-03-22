@@ -11,6 +11,7 @@ type Image = {
 export type ArticleResponse = {
   description: string;
   title: string;
+  body: string;
   tags: TagResponse[];
   users: UserResponse[];
   eyecatch: Image;
