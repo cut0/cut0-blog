@@ -21,24 +21,31 @@ import {
 type ArticleListProps = {
   tagId?: string;
   category: "recently" | "pick-up";
-  baseArticleData: {
-    tagId: string | null;
-    category: string;
-    data: ArticleResponse[];
-  }[];
+  baseArticleList: ArticleResponse[];
 };
 
 const ArticleList: VFC<ArticleListProps> = ({
   tagId,
   category,
-  baseArticleData,
+  baseArticleList,
 }) => {
-  const initialData = baseArticleData.find((item) => {
-    if (!tagId) {
-      return item.category === category && item.tagId === null;
-    }
-    return item.category === category && item.tagId === tagId;
-  })?.data;
+  const initialData = useMemo(() => {
+    return baseArticleList
+      .filter((article) => {
+        if (category === "pick-up") {
+          return article.isPicked;
+        }
+        return true;
+      })
+      .filter((article) => {
+        if (!!tagId) {
+          return article.tags.some((tag) => {
+            return tag.id === tagId;
+          });
+        }
+        return true;
+      });
+  }, [baseArticleList, category, tagId]);
 
   const { articleList, error, loading } = useArticleList(
     { category, tagId },
@@ -62,16 +69,12 @@ const ArticleList: VFC<ArticleListProps> = ({
 };
 
 type HomeContentProps = {
-  baseArticleData: {
-    tagId: string | null;
-    category: string;
-    data: ArticleResponse[];
-  }[];
+  articleList: ArticleResponse[];
   tagList: TagResponse[];
 };
 
 export const HomeContent: VFC<HomeContentProps> = ({
-  baseArticleData,
+  articleList,
   tagList,
 }) => {
   const router = useRouter();
@@ -151,7 +154,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
         <div className={ArticleListContainer}>
           {(category === "recently" || category === "pick-up") && (
             <ArticleList
-              baseArticleData={baseArticleData}
+              baseArticleList={articleList}
               category={category}
               tagId={Array.isArray(tagId) ? tagId[0] : tagId}
             />
