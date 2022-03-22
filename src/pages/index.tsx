@@ -1,45 +1,94 @@
 import type { NextPage, GetStaticPropsResult } from "next";
-import { useRef } from "react";
-import { BlogContentResponse, getBlogContentList } from "../../api-client";
-import { useBlogContentList } from "../hooks/blogContent";
-import { useIntersection } from "../hooks/common/intersectionHooks";
+import {
+  BlogContentResponse,
+  getBlogContentList,
+  getTagList,
+  TagResponse,
+} from "../../api-client";
+import { HomeContent } from "../components/content/Index";
 
 type HomeProps = {
-  initialBlogContentList: BlogContentResponse[];
+  baseBlogContentData: {
+    tagId: string | null;
+    category: string;
+    data: BlogContentResponse[];
+  }[];
+  tagList: TagResponse[];
 };
+
+const LIMIT = 20;
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<HomeProps>
 > => {
-  const initialBlogContentList = await getBlogContentList.handler({
-    offset: 0,
-    limit: 20,
+  const tagList = await getTagList.handler({});
+
+  const defaultRecentlyRequest = {
+    tagId: null,
+    category: "recently",
+    handler: getBlogContentList.handler({
+      offset: 0,
+      limit: LIMIT,
+    }),
+  };
+
+  const defaultPickUpRequest = {
+    tagId: null,
+    category: "pick-up",
+    handler: getBlogContentList.handler({
+      offset: 0,
+      limit: LIMIT,
+      filters: "isPicked[equals]true",
+    }),
+  };
+
+  const tagRecentlyRequests = tagList.map((tag) => {
+    const handler = getBlogContentList.handler({
+      offset: 0,
+      limit: LIMIT,
+      filters: `tags[contains]${tag.id}`,
+    });
+    return { tagId: tag.id, category: "recently", handler };
+  });
+
+  const tagPickUpRequests = tagList.map((tag) => {
+    const handler = getBlogContentList.handler({
+      offset: 0,
+      limit: LIMIT,
+      filters: `(isPicked[equals]true)[and](tags[contains]${tag.id})`,
+    });
+    return { tagId: tag.id, category: "pick-up", handler };
+  });
+
+  const requests = [
+    defaultRecentlyRequest,
+    defaultPickUpRequest,
+    ...tagRecentlyRequests,
+    ...tagPickUpRequests,
+  ];
+
+  const res = await Promise.all(requests.map((item) => item.handler));
+
+  const baseBlogContentData = requests.map((request, index) => {
+    const { tagId, category } = request;
+    return { tagId, category, data: res[index] };
   });
 
   return {
     props: {
-      initialBlogContentList,
+      baseBlogContentData,
+      tagList,
     },
   };
 };
 
-const Home: NextPage<HomeProps> = ({ initialBlogContentList }) => {
-  const {
-    data: blogContentList,
-    error,
-    loading,
-  } = useBlogContentList(initialBlogContentList);
-
-  const el = useRef(null);
-  useIntersection(el, {}, () => console.log("HELLO"));
+const Home: NextPage<HomeProps> = ({ baseBlogContentData, tagList }) => {
   return (
     <>
-      {loading && <p>ローディング中です</p>}
-      {error && <p>エラーが発生しました</p>}
-      {blogContentList &&
-        blogContentList.map((blogContent) => {
-          return <p key={blogContent.id}> {blogContent.title}</p>;
-        })}
+      <HomeContent
+        baseBlogContentData={baseBlogContentData}
+        tagList={tagList}
+      />
     </>
   );
 };
