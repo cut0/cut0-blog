@@ -16,19 +16,17 @@ type HomeProps = {
   tagList: TagResponse[];
 };
 
-const LIMIT = 20;
-
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<HomeProps>
 > => {
   const tagList = await getTagList.handler({});
+  const fields = "description,title,tags,users,eyecatch,isPicked";
 
   const defaultRecentlyRequest = {
     tagId: null,
     category: "recently",
     handler: getArticleList.handler({
-      offset: 0,
-      limit: LIMIT,
+      fields,
     }),
   };
 
@@ -36,16 +34,14 @@ export const getStaticProps = async (): Promise<
     tagId: null,
     category: "pick-up",
     handler: getArticleList.handler({
-      offset: 0,
-      limit: LIMIT,
+      fields,
       filters: "isPicked[equals]true",
     }),
   };
 
   const tagRecentlyRequests = tagList.map((tag) => {
     const handler = getArticleList.handler({
-      offset: 0,
-      limit: LIMIT,
+      fields,
       filters: `tags[contains]${tag.id}`,
     });
     return { tagId: tag.id, category: "recently", handler };
@@ -53,8 +49,7 @@ export const getStaticProps = async (): Promise<
 
   const tagPickUpRequests = tagList.map((tag) => {
     const handler = getArticleList.handler({
-      offset: 0,
-      limit: LIMIT,
+      fields,
       filters: `(isPicked[equals]true)[and](tags[contains]${tag.id})`,
     });
     return { tagId: tag.id, category: "pick-up", handler };
