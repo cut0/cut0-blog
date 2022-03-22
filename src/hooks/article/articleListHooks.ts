@@ -1,23 +1,20 @@
-import useSWRInfinite from "swr/infinite";
+import useSWR from "swr";
 import { ArticleResponse, getArticleList } from "../../../api-client";
-
-const LIMIT = 10;
 
 type FilterOptions = {
   category: "recently" | "pick-up";
   tagId?: string;
 };
 
-const fetcher = (
-  _: string,
-  pageIndex: number,
-  limit: number,
-  { category, tagId }: FilterOptions,
-) => {
-  const defaultQueries = {
-    offset: pageIndex * LIMIT,
-    limit,
+const getKey = ({ category, tagId }: FilterOptions) => {
+  return {
+    key: getArticleList.key,
+    category,
+    tagId,
   };
+};
+
+const fetcher = ({ category, tagId }: ReturnType<typeof getKey>) => {
   const filterStrList: string[] = [];
   if (category === "pick-up") {
     filterStrList.push("(isPicked[equals]true)");
@@ -28,47 +25,24 @@ const fetcher = (
 
   if (filterStrList.length > 0) {
     return getArticleList.handler({
-      ...defaultQueries,
       filters: filterStrList.join("[and]"),
     });
   }
-  return getArticleList.handler(defaultQueries);
+  return getArticleList.handler({});
 };
 
-const generateGetKey = ({ category, tagId }: FilterOptions) => {
-  const getKey = (
-    pageIndex: number,
-    previousPageData: ArticleResponse[],
-  ): [string, number, number, FilterOptions] | null => {
-    if (previousPageData && !previousPageData.length) {
-      return null;
-    }
-    return [getArticleList.key, pageIndex, LIMIT, { category, tagId }];
-  };
-  return getKey;
-};
-
-export const useArticleListInfinite = (
+export const useArticleList = (
   filterOptions: FilterOptions,
   initialData?: ArticleResponse[],
 ) => {
-  const getKey = generateGetKey(filterOptions);
-
-  const { data, error, size, setSize } = useSWRInfinite(getKey, fetcher, {
-    fallbackData: initialData ? [initialData] : undefined,
-  });
-
-  const isLast = data
-    ? data.filter((list) => list.length < LIMIT).length > 0
-    : false;
+  const { data, error } = useSWR<ArticleResponse[], Error>(
+    getKey(filterOptions),
+    fetcher,
+    { fallbackData: initialData },
+  );
 
   return {
-    articleList: data?.flat(),
-    articleListSize: size,
-    fetchArticleList: () => {
-      if (!isLast) return setSize((pre) => pre + 1);
-    },
-    isLast,
+    articleList: data,
     error,
     loading: !data && !error,
   };
