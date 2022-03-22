@@ -19,7 +19,7 @@ import {
   SelectedNavElement,
 } from "./Index.css";
 
-type ContentProps = {
+type ArticleListProps = {
   tagId?: string;
   category: "recently" | "pick-up";
   baseArticleData: {
@@ -29,7 +29,11 @@ type ContentProps = {
   }[];
 };
 
-const BlogList: VFC<ContentProps> = ({ tagId, category, baseArticleData }) => {
+const ArticleList: VFC<ArticleListProps> = ({
+  tagId,
+  category,
+  baseArticleData,
+}) => {
   const initialData = baseArticleData.find((item) => {
     if (!tagId) {
       return item.category === category && item.tagId === null;
@@ -40,7 +44,7 @@ const BlogList: VFC<ContentProps> = ({ tagId, category, baseArticleData }) => {
   const { articleList, error, fetchArticleList, loading } =
     useArticleListInfinite({ category, tagId }, initialData);
 
-  const el = useIntersection({}, () => fetchArticleList());
+  const fetchMoreDetector = useIntersection({}, () => fetchArticleList());
 
   return (
     <>
@@ -54,7 +58,9 @@ const BlogList: VFC<ContentProps> = ({ tagId, category, baseArticleData }) => {
             </div>
           );
         })}
-      {articleList && articleList?.length > 0 && <div ref={el} />}
+      {articleList && articleList?.length > 0 && (
+        <div ref={fetchMoreDetector} />
+      )}
     </>
   );
 };
@@ -145,14 +151,14 @@ export const HomeContent: VFC<HomeContentProps> = ({
         <div className={ArticleListContainer}>
           <>
             {category === "recently" && (
-              <BlogList
+              <ArticleList
                 baseArticleData={baseArticleData}
                 category={"recently"}
                 tagId={Array.isArray(tagId) ? tagId[0] : tagId}
               />
             )}
             {category === "pick-up" && (
-              <BlogList
+              <ArticleList
                 baseArticleData={baseArticleData}
                 category={"pick-up"}
                 tagId={Array.isArray(tagId) ? tagId[0] : tagId}

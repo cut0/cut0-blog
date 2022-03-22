@@ -8,8 +8,8 @@ export const formatMicroCMSContent = <T>(
   const limitVal = limit ? limit : 0;
 
   return data
-    .filter((el) => {
-      return id ? el.id === id : true;
+    .filter((item) => {
+      return id ? item.id === id : true;
     })
     .slice(
       offset ? offset : undefined,
