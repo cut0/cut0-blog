@@ -149,22 +149,20 @@ export const HomeContent: VFC<HomeContentProps> = ({
       </nav>
       <section className={ArticleListWrapper}>
         <div className={ArticleListContainer}>
-          <>
-            {category === "recently" && (
-              <ArticleList
-                baseArticleData={baseArticleData}
-                category={"recently"}
-                tagId={Array.isArray(tagId) ? tagId[0] : tagId}
-              />
-            )}
-            {category === "pick-up" && (
-              <ArticleList
-                baseArticleData={baseArticleData}
-                category={"pick-up"}
-                tagId={Array.isArray(tagId) ? tagId[0] : tagId}
-              />
-            )}
-          </>
+          {category === "recently" && (
+            <ArticleList
+              baseArticleData={baseArticleData}
+              category={"recently"}
+              tagId={Array.isArray(tagId) ? tagId[0] : tagId}
+            />
+          )}
+          {category === "pick-up" && (
+            <ArticleList
+              baseArticleData={baseArticleData}
+              category={"pick-up"}
+              tagId={Array.isArray(tagId) ? tagId[0] : tagId}
+            />
+          )}
         </div>
       </section>
     </>
