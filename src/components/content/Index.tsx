@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, VFC } from "react";
 import Select from "react-select";
 import { ArticleResponse, TagResponse } from "../../../api-client";
-import { useArticleListInfinite } from "../../hooks/article";
-import { useIntersection } from "../../hooks/common/intersectionHooks";
+import { useArticleList } from "../../hooks/article";
 import { ArticleCard } from "../article/ArticleCard";
 
 import {
@@ -41,10 +40,10 @@ const ArticleList: VFC<ArticleListProps> = ({
     return item.category === category && item.tagId === tagId;
   })?.data;
 
-  const { articleList, error, fetchArticleList, loading } =
-    useArticleListInfinite({ category, tagId }, initialData);
-
-  const fetchMoreDetector = useIntersection({}, () => fetchArticleList());
+  const { articleList, error, loading } = useArticleList(
+    { category, tagId },
+    initialData,
+  );
 
   return (
     <>
@@ -58,9 +57,6 @@ const ArticleList: VFC<ArticleListProps> = ({
             </div>
           );
         })}
-      {articleList && articleList?.length > 0 && (
-        <div ref={fetchMoreDetector} />
-      )}
     </>
   );
 };
@@ -141,7 +137,11 @@ export const HomeContent: VFC<HomeContentProps> = ({
               closeMenuOnSelect
               isClearable
               onChange={(e) =>
-                router.push({ query: { ...router.query, tagId: e?.value } })
+                router.push(
+                  { query: { ...router.query, tagId: e?.value } },
+                  undefined,
+                  { scroll: false },
+                )
               }
             />
           </div>
@@ -149,17 +149,10 @@ export const HomeContent: VFC<HomeContentProps> = ({
       </nav>
       <section className={ArticleListWrapper}>
         <div className={ArticleListContainer}>
-          {category === "recently" && (
+          {(category === "recently" || category === "pick-up") && (
             <ArticleList
               baseArticleData={baseArticleData}
-              category={"recently"}
-              tagId={Array.isArray(tagId) ? tagId[0] : tagId}
-            />
-          )}
-          {category === "pick-up" && (
-            <ArticleList
-              baseArticleData={baseArticleData}
-              category={"pick-up"}
+              category={category}
               tagId={Array.isArray(tagId) ? tagId[0] : tagId}
             />
           )}
