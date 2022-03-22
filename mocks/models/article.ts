@@ -5,6 +5,7 @@ import { formatMicroCMSContent } from "../utils/microCMS";
 const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
   return {
     id: String(index),
+    body: "",
     description: `${index} descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription`,
     title: `${index} titletitletitletitletitletitletitletitletitletitletitletitletitletitletitletitle`,
     tags: [
