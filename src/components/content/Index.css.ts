@@ -45,13 +45,13 @@ export const SelectedNavElement = style({
 
 export const NavSearchContainer = style({ padding: "8px 0" });
 
-export const BlogContentListWrapper = style({
+export const ArticleListWrapper = style({
   backgroundColor: "#49337D",
   minHeight: "100vh",
   paddingTop: "8px",
 });
 
-export const BlogContentListContainer = style({
+export const ArticleListContainer = style({
   maxWidth: "900px",
   margin: "0 auto",
   display: "grid",
@@ -59,4 +59,4 @@ export const BlogContentListContainer = style({
   gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
 });
 
-export const BlogContentContainer = style({ padding: "8px" });
+export const ArticleContainer = style({ padding: "8px" });

@@ -1,4 +1,4 @@
 export * from "./user";
 export * from "./tag";
-export * from "./blogContent";
+export * from "./article";
 export * from "./types";

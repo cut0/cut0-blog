@@ -1,5 +1,5 @@
 import useSWRInfinite from "swr/infinite";
-import { BlogContentResponse, getBlogContentList } from "../../../api-client";
+import { ArticleResponse, getArticleList } from "../../../api-client";
 
 const LIMIT = 10;
 
@@ -27,30 +27,30 @@ const fetcher = (
   }
 
   if (filterStrList.length > 0) {
-    return getBlogContentList.handler({
+    return getArticleList.handler({
       ...defaultQueries,
       filters: filterStrList.join("[and]"),
     });
   }
-  return getBlogContentList.handler(defaultQueries);
+  return getArticleList.handler(defaultQueries);
 };
 
 const generateGetKey = ({ category, tagId }: FilterOptions) => {
   const getKey = (
     pageIndex: number,
-    previousPageData: BlogContentResponse[],
+    previousPageData: ArticleResponse[],
   ): [string, number, number, FilterOptions] | null => {
     if (previousPageData && !previousPageData.length) {
       return null;
     }
-    return [getBlogContentList.key, pageIndex, LIMIT, { category, tagId }];
+    return [getArticleList.key, pageIndex, LIMIT, { category, tagId }];
   };
   return getKey;
 };
 
-export const useBlogContentListInfinite = (
+export const useArticleListInfinite = (
   filterOptions: FilterOptions,
-  initialData?: BlogContentResponse[],
+  initialData?: ArticleResponse[],
 ) => {
   const getKey = generateGetKey(filterOptions);
 
@@ -63,9 +63,9 @@ export const useBlogContentListInfinite = (
     : false;
 
   return {
-    blogContentList: data?.flat(),
-    blogContentListSize: size,
-    fetchBlogContentList: () => {
+    articleList: data?.flat(),
+    articleListSize: size,
+    fetchArticleList: () => {
       if (!isLast) return setSize((pre) => pre + 1);
     },
     isLast,

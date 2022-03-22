@@ -12,7 +12,7 @@ export const Card = style({
   },
 });
 
-export const BlogContentBookmarkContainer = style({
+export const ArticleBookmarkContainer = style({
   position: "absolute",
   right: 0,
   top: 0,
@@ -26,32 +26,32 @@ export const BlogContentBookmarkContainer = style({
   alignItems: "center",
 });
 
-export const BlogContentEyecatchContainer = style({
+export const ArticleEyecatchContainer = style({
   height: "192px",
   position: "relative",
   borderRadius: "16px 16px 0 0",
 });
 
-export const BlogContentEyecatch = style({
+export const ArticleEyecatch = style({
   backgroundColor: "#939CA3",
   borderRadius: "16px 16px 0 0",
 });
 
-export const BlogContentInfoContainer = style({
+export const ArticleInfoContainer = style({
   backgroundColor: "white",
   padding: "16px",
   borderRadius: "0 0 16px 16px",
 });
 
-export const BlogContentTitle = style({
+export const ArticleTitle = style({
   fontWeight: "bold",
   fontSize: "1rem",
   margin: 0,
 });
 
-export const BlogContentTagsContainer = style({ padding: "16px 0" });
+export const ArticleTagsContainer = style({ padding: "16px 0" });
 
-export const BlogContentTag = style({
+export const ArticleTag = style({
   fontSize: "0.875rem",
   color: "#0697F9",
   paddingRight: "8px",

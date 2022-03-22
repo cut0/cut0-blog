@@ -1,8 +1,8 @@
 import { MicroCMSQueries } from "microcms-js-sdk";
-import { BlogContentResponse } from "../../api-client";
+import { ArticleResponse } from "../../api-client";
 import { formatMicroCMSContent } from "../utils/microCMS";
 
-const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
+const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
   return {
     id: String(index),
     description: `${index} descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription`,
@@ -61,7 +61,7 @@ const testdata: BlogContentResponse[] = [...new Array(100)].map((_, index) => {
   };
 });
 
-export const mockGetBlogContentList = (queries: MicroCMSQueries) => {
+export const mockGetArticleList = (queries: MicroCMSQueries) => {
   const { offset, limit } = queries;
   return formatMicroCMSContent(testdata, {
     offset: offset ? Number(offset) : undefined,
@@ -69,7 +69,7 @@ export const mockGetBlogContentList = (queries: MicroCMSQueries) => {
   });
 };
 
-export const mockGetBlogContent = (id: string, queries: MicroCMSQueries) => {
+export const mockGetArticle = (id: string, queries: MicroCMSQueries) => {
   const { offset, limit } = queries;
   return formatMicroCMSContent(testdata, {
     id: id ? id : undefined,

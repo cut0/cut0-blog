@@ -1,21 +1,21 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { getBlogContentList } from "../../../api-client";
-import { mockGetBlogContentList } from "../../../mocks";
+import { getArticleList } from "../../../api-client";
+import { mockGetArticleList } from "../../../mocks";
 import { SwrTestWrapper } from "../../components/SwrTestWrapper";
-import { useBlogContentListInfinite } from "./blogContentListHooks";
+import { useArticleListInfinite } from "./articleListHooks";
 
 test("初期状態", async () => {
   const { result } = renderHook(
-    () => useBlogContentListInfinite({ category: "recently" }),
+    () => useArticleListInfinite({ category: "recently" }),
     {
       wrapper: SwrTestWrapper,
     },
   );
 
   expect(result.current).toEqual({
-    blogContentList: undefined,
-    blogContentListSize: 1,
-    fetchBlogContentList: expect.any(Function),
+    articleList: undefined,
+    articleListSize: 1,
+    fetchArticleList: expect.any(Function),
     isLast: false,
     error: undefined,
     loading: true,
@@ -24,7 +24,7 @@ test("初期状態", async () => {
 
 test("初回レンダリング時", async () => {
   const { result } = renderHook(
-    () => useBlogContentListInfinite({ category: "recently" }),
+    () => useArticleListInfinite({ category: "recently" }),
     {
       wrapper: SwrTestWrapper,
     },
@@ -33,9 +33,9 @@ test("初回レンダリング時", async () => {
   await act(async () => {});
 
   expect(result.current).toEqual({
-    blogContentList: mockGetBlogContentList({ offset: 0, limit: 10 }),
-    blogContentListSize: 1,
-    fetchBlogContentList: expect.any(Function),
+    articleList: mockGetArticleList({ offset: 0, limit: 10 }),
+    articleListSize: 1,
+    fetchArticleList: expect.any(Function),
     isLast: false,
     error: undefined,
     loading: false,
@@ -44,21 +44,21 @@ test("初回レンダリング時", async () => {
 
 test("取得成功時", async () => {
   const { result } = renderHook(
-    () => useBlogContentListInfinite({ category: "recently" }),
+    () => useArticleListInfinite({ category: "recently" }),
     {
       wrapper: SwrTestWrapper,
     },
   );
 
   await act(async () => {
-    await result.current.fetchBlogContentList();
-    await result.current.fetchBlogContentList();
+    await result.current.fetchArticleList();
+    await result.current.fetchArticleList();
   });
 
   expect(result.current).toEqual({
-    blogContentList: mockGetBlogContentList({ offset: 0, limit: 30 }),
-    blogContentListSize: 3,
-    fetchBlogContentList: expect.any(Function),
+    articleList: mockGetArticleList({ offset: 0, limit: 30 }),
+    articleListSize: 3,
+    fetchArticleList: expect.any(Function),
     isLast: false,
     error: undefined,
     loading: false,
@@ -67,24 +67,24 @@ test("取得成功時", async () => {
 
 test("取得失敗時", async () => {
   const mock = jest
-    .spyOn(getBlogContentList, "handler")
+    .spyOn(getArticleList, "handler")
     .mockRejectedValue(new Error());
 
   const { result } = renderHook(
-    () => useBlogContentListInfinite({ category: "recently" }),
+    () => useArticleListInfinite({ category: "recently" }),
     {
       wrapper: SwrTestWrapper,
     },
   );
 
   await act(async () => {
-    await result.current.fetchBlogContentList();
+    await result.current.fetchArticleList();
   });
 
   expect(result.current).toEqual({
-    blogContentList: undefined,
-    blogContentListSize: 2,
-    fetchBlogContentList: expect.any(Function),
+    articleList: undefined,
+    articleListSize: 2,
+    fetchArticleList: expect.any(Function),
     isLast: false,
     error: new Error(),
     loading: false,
@@ -95,24 +95,24 @@ test("取得失敗時", async () => {
 
 test("エラー発生後のデータ整合性", async () => {
   const mock = jest
-    .spyOn(getBlogContentList, "handler")
+    .spyOn(getArticleList, "handler")
     .mockRejectedValueOnce(new Error());
 
   const { result } = renderHook(
-    () => useBlogContentListInfinite({ category: "recently" }),
+    () => useArticleListInfinite({ category: "recently" }),
     {
       wrapper: SwrTestWrapper,
     },
   );
 
   await act(async () => {
-    await result.current.fetchBlogContentList();
+    await result.current.fetchArticleList();
   });
 
   expect(result.current).toEqual({
-    blogContentList: mockGetBlogContentList({ offset: 0, limit: 20 }),
-    blogContentListSize: 2,
-    fetchBlogContentList: expect.any(Function),
+    articleList: mockGetArticleList({ offset: 0, limit: 20 }),
+    articleListSize: 2,
+    fetchArticleList: expect.any(Function),
     isLast: false,
     error: new Error(),
     loading: false,

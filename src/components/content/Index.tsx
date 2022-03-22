@@ -2,15 +2,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, VFC } from "react";
 import Select from "react-select";
-import { BlogContentResponse, TagResponse } from "../../../api-client";
-import { useBlogContentListInfinite } from "../../hooks/blogContent";
+import { ArticleResponse, TagResponse } from "../../../api-client";
+import { useArticleListInfinite } from "../../hooks/article";
 import { useIntersection } from "../../hooks/common/intersectionHooks";
-import { BlogContentCard } from "../blogContent/BlogContentCard";
+import { ArticleCard } from "../article/ArticleCard";
 
 import {
-  BlogContentListWrapper,
-  BlogContentListContainer,
-  BlogContentContainer,
+  ArticleListWrapper,
+  ArticleListContainer,
+  ArticleContainer,
   NavWrapper,
   NavContainer,
   NavLinksContainer,
@@ -22,58 +22,54 @@ import {
 type ContentProps = {
   tagId?: string;
   category: "recently" | "pick-up";
-  baseBlogContentData: {
+  baseArticleData: {
     tagId: string | null;
     category: string;
-    data: BlogContentResponse[];
+    data: ArticleResponse[];
   }[];
 };
 
-const BlogList: VFC<ContentProps> = ({
-  tagId,
-  category,
-  baseBlogContentData,
-}) => {
-  const initialData = baseBlogContentData.find((item) => {
+const BlogList: VFC<ContentProps> = ({ tagId, category, baseArticleData }) => {
+  const initialData = baseArticleData.find((item) => {
     if (!tagId) {
       return item.category === category && item.tagId === null;
     }
     return item.category === category && item.tagId === tagId;
   })?.data;
 
-  const { blogContentList, error, fetchBlogContentList, loading } =
-    useBlogContentListInfinite({ category, tagId }, initialData);
+  const { articleList, error, fetchArticleList, loading } =
+    useArticleListInfinite({ category, tagId }, initialData);
 
-  const el = useIntersection({}, () => fetchBlogContentList());
+  const el = useIntersection({}, () => fetchArticleList());
 
   return (
     <>
       {loading && <p>ローディング中です</p>}
       {error && <p>エラーが発生しました</p>}
-      {blogContentList &&
-        blogContentList.map((blogContent, index) => {
+      {articleList &&
+        articleList.map((article, index) => {
           return (
-            <div className={BlogContentContainer} key={index}>
-              <BlogContentCard blogContent={blogContent} />
+            <div className={ArticleContainer} key={index}>
+              <ArticleCard article={article} />
             </div>
           );
         })}
-      {blogContentList && blogContentList?.length > 0 && <div ref={el} />}
+      {articleList && articleList?.length > 0 && <div ref={el} />}
     </>
   );
 };
 
 type HomeContentProps = {
-  baseBlogContentData: {
+  baseArticleData: {
     tagId: string | null;
     category: string;
-    data: BlogContentResponse[];
+    data: ArticleResponse[];
   }[];
   tagList: TagResponse[];
 };
 
 export const HomeContent: VFC<HomeContentProps> = ({
-  baseBlogContentData,
+  baseArticleData,
   tagList,
 }) => {
   const router = useRouter();
@@ -145,19 +141,19 @@ export const HomeContent: VFC<HomeContentProps> = ({
           </div>
         </div>
       </nav>
-      <section className={BlogContentListWrapper}>
-        <div className={BlogContentListContainer}>
+      <section className={ArticleListWrapper}>
+        <div className={ArticleListContainer}>
           <>
             {category === "recently" && (
               <BlogList
-                baseBlogContentData={baseBlogContentData}
+                baseArticleData={baseArticleData}
                 category={"recently"}
                 tagId={Array.isArray(tagId) ? tagId[0] : tagId}
               />
             )}
             {category === "pick-up" && (
               <BlogList
-                baseBlogContentData={baseBlogContentData}
+                baseArticleData={baseArticleData}
                 category={"pick-up"}
                 tagId={Array.isArray(tagId) ? tagId[0] : tagId}
               />

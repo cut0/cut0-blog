@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticPropsResult } from "next";
 import { getTagList, TagResponse } from "../../api-client";
 
-const BlogContent: NextPage = () => {
+const Article: NextPage = () => {
   return (
     <>
       <p>詳細ページ</p>
@@ -9,4 +9,4 @@ const BlogContent: NextPage = () => {
   );
 };
 
-export default BlogContent;
+export default Article;

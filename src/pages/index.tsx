@@ -1,17 +1,17 @@
 import type { NextPage, GetStaticPropsResult } from "next";
 import {
-  BlogContentResponse,
-  getBlogContentList,
+  ArticleResponse,
+  getArticleList,
   getTagList,
   TagResponse,
 } from "../../api-client";
 import { HomeContent } from "../components/content/Index";
 
 type HomeProps = {
-  baseBlogContentData: {
+  baseArticleData: {
     tagId: string | null;
     category: string;
-    data: BlogContentResponse[];
+    data: ArticleResponse[];
   }[];
   tagList: TagResponse[];
 };
@@ -26,7 +26,7 @@ export const getStaticProps = async (): Promise<
   const defaultRecentlyRequest = {
     tagId: null,
     category: "recently",
-    handler: getBlogContentList.handler({
+    handler: getArticleList.handler({
       offset: 0,
       limit: LIMIT,
     }),
@@ -35,7 +35,7 @@ export const getStaticProps = async (): Promise<
   const defaultPickUpRequest = {
     tagId: null,
     category: "pick-up",
-    handler: getBlogContentList.handler({
+    handler: getArticleList.handler({
       offset: 0,
       limit: LIMIT,
       filters: "isPicked[equals]true",
@@ -43,7 +43,7 @@ export const getStaticProps = async (): Promise<
   };
 
   const tagRecentlyRequests = tagList.map((tag) => {
-    const handler = getBlogContentList.handler({
+    const handler = getArticleList.handler({
       offset: 0,
       limit: LIMIT,
       filters: `tags[contains]${tag.id}`,
@@ -52,7 +52,7 @@ export const getStaticProps = async (): Promise<
   });
 
   const tagPickUpRequests = tagList.map((tag) => {
-    const handler = getBlogContentList.handler({
+    const handler = getArticleList.handler({
       offset: 0,
       limit: LIMIT,
       filters: `(isPicked[equals]true)[and](tags[contains]${tag.id})`,
@@ -69,26 +69,23 @@ export const getStaticProps = async (): Promise<
 
   const res = await Promise.all(requests.map((item) => item.handler));
 
-  const baseBlogContentData = requests.map((request, index) => {
+  const baseArticleData = requests.map((request, index) => {
     const { tagId, category } = request;
     return { tagId, category, data: res[index] };
   });
 
   return {
     props: {
-      baseBlogContentData,
+      baseArticleData,
       tagList,
     },
   };
 };
 
-const Home: NextPage<HomeProps> = ({ baseBlogContentData, tagList }) => {
+const Home: NextPage<HomeProps> = ({ baseArticleData, tagList }) => {
   return (
     <>
-      <HomeContent
-        baseBlogContentData={baseBlogContentData}
-        tagList={tagList}
-      />
+      <HomeContent baseArticleData={baseArticleData} tagList={tagList} />
     </>
   );
 };

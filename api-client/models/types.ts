@@ -8,7 +8,7 @@ type Image = {
   width: number;
 };
 
-export type BlogContentResponse = {
+export type ArticleResponse = {
   description: string;
   title: string;
   tags: TagResponse[];
