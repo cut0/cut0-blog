@@ -4,9 +4,6 @@ export const formatMicroCMSContent = <T>(
   data: (T & { id: string })[],
   { id, limit, offset }: MicroCMSQueries & { id?: string },
 ): (T & { id: string })[] => {
-  const offsetVal = offset ? offset : 0;
-  const limitVal = limit ? limit : 0;
-
   return data
     .filter((item) => {
       return id ? item.id === id : true;
