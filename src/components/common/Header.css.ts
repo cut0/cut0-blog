@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 export const HeaderWrapper = style({
-  backgroundColor: "white",
+  backgroundColor: "#2B2B2E",
   zIndex: 1,
 });
 
@@ -17,4 +17,5 @@ export const HeaderTitle = style({
   fontSize: "1.5rem",
   padding: "8px 0",
   cursor: "pointer",
+  color: "white",
 });
