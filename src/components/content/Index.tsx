@@ -94,15 +94,18 @@ export const HomeContent: VFC<HomeContentProps> = ({
                   router.pathname === "/recently" ||
                   router.pathname === "/recently/[tagId]"
                 ) {
-                  router.push({ pathname: `/recently/${e?.value}` });
+                  router.push({
+                    pathname: `/recently${e?.value ? `/${e?.value}` : ""}`,
+                  });
                 }
                 if (
                   router.pathname === "/pick-up" ||
                   router.pathname === "/pick-up/[tagId]"
                 ) {
-                  router.push({ pathname: `/pick-up/${e?.value}` });
+                  router.push({
+                    pathname: `/pick-up/${e?.value ? `/${e?.value}` : ""}`,
+                  });
                 }
-                console.log(router);
               }}
             />
           </div>
