@@ -27,7 +27,10 @@ type ArticleCardProps = {
 export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
   return (
     <Link
-      href={{ pathname: "/articles/[id]", query: { id: article.id } }}
+      href={{
+        pathname: "/articles/[articleId]",
+        query: { articleId: article.id },
+      }}
       passHref
     >
       <article className={Card}>
