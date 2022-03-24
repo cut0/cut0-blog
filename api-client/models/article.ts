@@ -22,7 +22,7 @@ export const getArticle: MicroCMSGETModel<ArticleResponse> = {
   key: GET_BLOG_CONTENT_KEY,
   handler: async (id, queries) => {
     const data = await client.get<ArticleResponse>({
-      endpoint: "blogs",
+      endpoint: "blog-contents",
       contentId: id,
       queries,
     });
