@@ -12,4 +12,9 @@ export const HeaderContainer = style({
   padding: "0 16px",
 });
 
-export const HeaderTitle = style({ margin: 0, padding: "8px 0" });
+export const HeaderTitle = style({
+  margin: 0,
+  fontSize: "1.5rem",
+  padding: "8px 0",
+  cursor: "pointer",
+});
