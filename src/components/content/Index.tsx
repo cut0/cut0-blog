@@ -50,7 +50,10 @@ export const HomeContent: VFC<HomeContentProps> = ({
       <nav className={NavWrapper}>
         <div className={NavContainer}>
           <div className={NavLinksContainer}>
-            <Link href={{ pathname: "/recently" }} scroll={false}>
+            <Link
+              href={{ pathname: `/recently${tagId ? `/${tagId}` : ""}` }}
+              scroll={false}
+            >
               <a
                 className={`${NavLinkElement} ${
                   category === undefined || category === "recently"
@@ -61,7 +64,10 @@ export const HomeContent: VFC<HomeContentProps> = ({
                 Recently
               </a>
             </Link>
-            <Link href={{ pathname: "/pick-up" }} scroll={false}>
+            <Link
+              href={{ pathname: `/pick-up${tagId ? `/${tagId}` : ""}` }}
+              scroll={false}
+            >
               <a
                 className={`${NavLinkElement} ${
                   category === "pick-up" ? SelectedNavElement : ""
@@ -74,22 +80,29 @@ export const HomeContent: VFC<HomeContentProps> = ({
           <div className={NavSearchContainer}>
             <Select
               aria-label="tag選択"
+              defaultValue={tagOptions.find((tag) => tag.value === tagId)}
               id="TagSelectBox"
               instanceId="TagSelectBox"
               name="tags"
               options={tagOptions}
               placeholder="タグを選択"
-              value={tagOptions.find((tag) => tag.value === tagId)}
               closeMenuOnScroll
               closeMenuOnSelect
               isClearable
               onChange={(e) => {
-                if (router.pathname === "/recently") {
+                if (
+                  router.pathname === "/recently" ||
+                  router.pathname === "/recently/[tagId]"
+                ) {
                   router.push({ pathname: `/recently/${e?.value}` });
                 }
-                if (router.pathname === "/pick-up") {
+                if (
+                  router.pathname === "/pick-up" ||
+                  router.pathname === "/pick-up/[tagId]"
+                ) {
                   router.push({ pathname: `/pick-up/${e?.value}` });
                 }
+                console.log(router);
               }}
             />
           </div>
