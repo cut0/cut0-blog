@@ -1,12 +1,11 @@
 import type { NextPage, GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
 import {
   ArticleResponse,
   getArticleList,
   getTagList,
   TagResponse,
-} from "../../api-client";
-import { HomeContent } from "../components/content/Index";
+} from "../../../api-client";
+import { HomeContent } from "../../components/content/Index";
 
 type HomeProps = {
   tagList: TagResponse[];
@@ -20,6 +19,7 @@ export const getStaticProps = async (): Promise<
   const [articleList, tagList] = await Promise.all([
     getArticleList.handler({
       fields,
+      filters: "(isPicked[equals]true)",
     }),
     getTagList.handler({}),
   ]);
@@ -29,16 +29,16 @@ export const getStaticProps = async (): Promise<
   };
 };
 
-const Home: NextPage<HomeProps> = ({ articleList, tagList }) => {
+const Page: NextPage<HomeProps> = ({ articleList, tagList }) => {
   return (
     <>
       <HomeContent
         baseArticleList={articleList}
-        category="recently"
+        category="pick-up"
         tagList={tagList}
       />
     </>
   );
 };
 
-export default Home;
+export default Page;

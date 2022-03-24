@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 export const NavWrapper = style({
-  backgroundColor: "white",
+  backgroundColor: "#2B2B2E",
   position: "sticky",
   top: 0,
   zIndex: 100,
@@ -26,18 +26,18 @@ export const NavLinkElement = style({
   padding: "8px 0px 8px 0px",
   marginRight: "16px",
   position: "relative",
-  color: "#939CA3",
+  color: "#B7B8C0",
   textDecoration: "none",
 });
 
 export const SelectedNavElement = style({
-  color: "black",
+  color: "white",
   "::after": {
     content: "",
     position: "absolute",
     left: 0,
     bottom: 0,
-    backgroundColor: "black",
+    backgroundColor: "white",
     height: "2px",
     width: "100%",
   },
@@ -46,7 +46,7 @@ export const SelectedNavElement = style({
 export const NavSearchContainer = style({ padding: "8px 0" });
 
 export const ArticleListWrapper = style({
-  backgroundColor: "#49337D",
+  backgroundColor: "#EAEAEA",
   minHeight: "100vh",
   paddingTop: "8px",
 });

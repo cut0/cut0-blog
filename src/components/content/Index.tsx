@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, VFC } from "react";
+import { useEffect, useMemo, useRef, useState, VFC } from "react";
 import Select from "react-select";
 import { ArticleResponse, TagResponse } from "../../../api-client";
 import { useArticleList } from "../../hooks/article";
 import { ArticleCard } from "../article/ArticleCard";
-
 import {
   ArticleListWrapper,
   ArticleListContainer,
@@ -18,70 +17,19 @@ import {
   SelectedNavElement,
 } from "./Index.css";
 
-type ArticleListProps = {
-  tagId?: string;
-  category: "recently" | "pick-up";
-  baseArticleList: ArticleResponse[];
-};
-
-const ArticleList: VFC<ArticleListProps> = ({
-  tagId,
-  category,
-  baseArticleList,
-}) => {
-  const initialData = useMemo(() => {
-    return baseArticleList
-      .filter((article) => {
-        if (category === "pick-up") {
-          return article.isPicked;
-        }
-        return true;
-      })
-      .filter((article) => {
-        if (!!tagId) {
-          return article.tags.some((tag) => {
-            return tag.id === tagId;
-          });
-        }
-        return true;
-      });
-  }, [baseArticleList, category, tagId]);
-
-  const { articleList, error, loading } = useArticleList(
-    { category, tagId },
-    initialData,
-  );
-
-  return (
-    <>
-      {loading && <p>ローディング中です</p>}
-      {error && <p>エラーが発生しました</p>}
-      {articleList &&
-        articleList.map((article, index) => {
-          return (
-            <div className={ArticleContainer} key={index}>
-              <ArticleCard article={article} />
-            </div>
-          );
-        })}
-    </>
-  );
-};
-
 type HomeContentProps = {
-  articleList: ArticleResponse[];
+  baseArticleList: ArticleResponse[];
   tagList: TagResponse[];
+  category: "recently" | "pick-up";
+  tagId?: string;
 };
 
 export const HomeContent: VFC<HomeContentProps> = ({
-  articleList,
+  baseArticleList,
   tagList,
+  category,
+  tagId,
 }) => {
-  const router = useRouter();
-  const {
-    query: { category, tagId },
-  } = router;
-
   const tagOptions = useMemo(
     () =>
       tagList.map((tag) => {
@@ -90,20 +38,19 @@ export const HomeContent: VFC<HomeContentProps> = ({
     [tagList],
   );
 
-  useEffect(() => {
-    if (router.isReady && category === undefined)
-      router.replace({ query: { ...router.query, category: "recently" } });
-  }, [category, router]);
+  const { articleList, error, loading } = useArticleList(
+    { category, tagId },
+    baseArticleList,
+  );
+
+  const router = useRouter();
 
   return (
     <>
       <nav className={NavWrapper}>
         <div className={NavContainer}>
           <div className={NavLinksContainer}>
-            <Link
-              href={{ query: { ...router.query, category: "recently" } }}
-              scroll={false}
-            >
+            <Link href={{ pathname: "/recently" }} scroll={false}>
               <a
                 className={`${NavLinkElement} ${
                   category === undefined || category === "recently"
@@ -114,10 +61,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
                 Recently
               </a>
             </Link>
-            <Link
-              href={{ query: { ...router.query, category: "pick-up" } }}
-              scroll={false}
-            >
+            <Link href={{ pathname: "/pick-up" }} scroll={false}>
               <a
                 className={`${NavLinkElement} ${
                   category === "pick-up" ? SelectedNavElement : ""
@@ -130,37 +74,41 @@ export const HomeContent: VFC<HomeContentProps> = ({
           <div className={NavSearchContainer}>
             <Select
               aria-label="tag選択"
-              defaultValue={tagOptions.find((tag) => tag.value === tagId)}
               id="TagSelectBox"
               instanceId="TagSelectBox"
               name="tags"
               options={tagOptions}
               placeholder="タグを選択"
+              value={tagOptions.find((tag) => tag.value === tagId)}
               closeMenuOnScroll
               closeMenuOnSelect
               isClearable
-              onChange={(e) =>
-                router.push(
-                  { query: { ...router.query, tagId: e?.value } },
-                  undefined,
-                  { scroll: false },
-                )
-              }
+              onChange={(e) => {
+                if (router.pathname === "/recently") {
+                  router.push({ pathname: `/recently/${e?.value}` });
+                }
+                if (router.pathname === "/pick-up") {
+                  router.push({ pathname: `/pick-up/${e?.value}` });
+                }
+              }}
             />
           </div>
         </div>
       </nav>
-      <section className={ArticleListWrapper}>
+      <div className={ArticleListWrapper}>
         <div className={ArticleListContainer}>
-          {(category === "recently" || category === "pick-up") && (
-            <ArticleList
-              baseArticleList={articleList}
-              category={category}
-              tagId={Array.isArray(tagId) ? tagId[0] : tagId}
-            />
-          )}
+          {loading && <p>ローディング中です</p>}
+          {error && <p>エラーが発生しました</p>}
+          {articleList &&
+            articleList.map((article, index) => {
+              return (
+                <section className={ArticleContainer} key={index}>
+                  <ArticleCard article={article} />
+                </section>
+              );
+            })}
         </div>
-      </section>
+      </div>
     </>
   );
 };
