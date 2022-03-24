@@ -1,7 +1,6 @@
 import { VFC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ArticleResponse } from "../../../api-client";
 import Bookmark from "../../../assets/bookmark.svg";
 import { formatDate } from "../../utils/date";
@@ -27,7 +26,10 @@ type ArticleCardProps = {
 
 export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
   return (
-    <Link href={{ pathname: "/[id]", query: { id: article.id } }} passHref>
+    <Link
+      href={{ pathname: "/articles/[id]", query: { id: article.id } }}
+      passHref
+    >
       <article className={Card}>
         <div className={ArticleBookmarkContainer}>
           <Bookmark />
