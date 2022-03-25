@@ -15,6 +15,7 @@ import {
   ArticleTag,
   UserInfoContainer,
   UserInfo,
+  UserEyecatchContainer,
   UserEyecatch,
   UserName,
   PublishedAt,
@@ -28,7 +29,7 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
   return (
     <Link
       href={{
-        pathname: "/articles/[articleId]",
+        pathname: "/[articleId]",
         query: { articleId: article.id },
       }}
       passHref
@@ -41,10 +42,12 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
           <Image
             alt="ブログの画像"
             className={ArticleEyecatch}
+            height={article.eyecatch.height}
             layout="fill"
             loading="lazy"
             objectFit="cover"
             src={article.eyecatch.url}
+            width={article.eyecatch.width}
           />
         </div>
         <div className={ArticleInfoContainer}>
@@ -59,14 +62,18 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
             })}
           </div>
           <div className={UserInfoContainer}>
-            <Image
-              alt="筆者のアイコン"
-              className={UserEyecatch}
-              height="36px"
-              loading="lazy"
-              src={article.users[0].eyecatch.url}
-              width="36px"
-            />
+            <div className={UserEyecatchContainer}>
+              <Image
+                alt="筆者のアイコン"
+                className={UserEyecatch}
+                height={article.users[0].eyecatch.height}
+                layout="fill"
+                loading="lazy"
+                objectFit="cover"
+                src={article.users[0].eyecatch.url}
+                width={article.users[0].eyecatch.width}
+              />
+            </div>
             <div className={UserInfo}>
               <span className={UserName}>{article.users[0].name}</span>
               <span className={PublishedAt}>

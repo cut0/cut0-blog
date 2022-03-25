@@ -49,7 +49,12 @@ export const ArticleTitle = style({
   margin: 0,
 });
 
-export const ArticleTagsContainer = style({ padding: "16px 0" });
+export const ArticleTagsContainer = style({
+  padding: "16px 0",
+  display: "flex",
+  flexWrap: "wrap",
+  height: "74px",
+});
 
 export const ArticleTag = style({
   fontSize: "0.875rem",
@@ -61,6 +66,12 @@ export const UserInfoContainer = style({
   display: "flex",
   justifyContent: "flex-end",
   alignItems: "center",
+});
+
+export const UserEyecatchContainer = style({
+  height: "36px",
+  width: "36px",
+  position: "relative",
 });
 
 export const UserEyecatch = style({
