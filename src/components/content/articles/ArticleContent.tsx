@@ -7,7 +7,7 @@ import {
   ArticleContainer,
   ArticleTitle,
   Article,
-} from "./[articleId].css";
+} from "./ArticleContent.css";
 
 type ArticleContentProps = {
   article: ArticleResponse;

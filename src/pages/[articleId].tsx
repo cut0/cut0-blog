@@ -1,6 +1,6 @@
 import type { NextPage, GetStaticPropsResult } from "next";
 import { ArticleResponse, getArticle, getArticleList } from "../../api-client";
-import { ArticleContent } from "../components/content/articles/[articleId]";
+import { ArticleContent } from "../components/content/articles/ArticleContent";
 
 type ArticleProps = {
   article: ArticleResponse;

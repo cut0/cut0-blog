@@ -5,7 +5,7 @@ import {
   getTagList,
   TagResponse,
 } from "../../../api-client";
-import { HomeContent } from "../../components/content/Index";
+import { HomeContent } from "../../components/content/HomeContent";
 
 type HomeProps = {
   tagId: string;

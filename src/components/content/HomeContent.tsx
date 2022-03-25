@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useRef, useState, VFC } from "react";
+import { useMemo, VFC } from "react";
 import Select from "react-select";
 import { ArticleResponse, TagResponse } from "../../../api-client";
 import { useArticleList } from "../../hooks/article";
@@ -15,7 +15,7 @@ import {
   NavLinkElement,
   NavSearchContainer,
   SelectedNavElement,
-} from "./Index.css";
+} from "./HomeContent.css";
 
 type HomeContentProps = {
   baseArticleList: ArticleResponse[];
@@ -56,9 +56,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
             >
               <a
                 className={`${NavLinkElement} ${
-                  category === undefined || category === "recently"
-                    ? SelectedNavElement
-                    : ""
+                  category === "recently" ? SelectedNavElement : ""
                 }`}
               >
                 Recently
@@ -91,6 +89,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
               isClearable
               onChange={(e) => {
                 if (
+                  router.pathname === "/" ||
                   router.pathname === "/recently" ||
                   router.pathname === "/recently/[tagId]"
                 ) {

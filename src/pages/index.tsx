@@ -1,12 +1,11 @@
 import type { NextPage, GetStaticPropsResult } from "next";
-import { useRouter } from "next/router";
 import {
   ArticleResponse,
   getArticleList,
   getTagList,
   TagResponse,
 } from "../../api-client";
-import { HomeContent } from "../components/content/Index";
+import { HomeContent } from "../components/content/HomeContent";
 
 type HomeProps = {
   tagList: TagResponse[];
