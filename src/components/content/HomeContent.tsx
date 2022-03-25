@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo, VFC } from "react";
+import { useEffect, useMemo, useState, VFC } from "react";
 import Select from "react-select";
 import { ArticleResponse, TagResponse } from "../../../api-client";
 import { useArticleList } from "../../hooks/article";
 import { ArticleCard } from "../article/ArticleCard";
+import { ErrorToast } from "../common/ErrorToast";
 import {
+  ErrorToastContainer,
   ArticleListWrapper,
   ArticleListContainer,
   ArticleContainer,
@@ -43,10 +45,24 @@ export const HomeContent: VFC<HomeContentProps> = ({
     baseArticleList,
   );
 
+  const [showErrorToast, setShowErrorToast] = useState(false);
+
+  useEffect(() => {
+    setShowErrorToast(!!error);
+  }, [error]);
+
   const router = useRouter();
 
   return (
     <>
+      {showErrorToast && (
+        <div className={ErrorToastContainer}>
+          <ErrorToast
+            closeHandler={() => setShowErrorToast(false)}
+            message="データ取得時にエラーが発生しました。"
+          />
+        </div>
+      )}
       <nav className={NavWrapper}>
         <div className={NavContainer}>
           <div className={NavLinksContainer}>
@@ -112,8 +128,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
       </nav>
       <div className={ArticleListWrapper}>
         <div className={ArticleListContainer}>
-          {loading && <p>ローディング中です</p>}
-          {error && <p>エラーが発生しました</p>}
+          {articleList && articleList?.length < 1 && <p>データがありません</p>}
           {articleList &&
             articleList.map((article, index) => {
               return (
