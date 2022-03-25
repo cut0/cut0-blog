@@ -1,10 +1,6 @@
 import type { NextPage, GetStaticPropsResult } from "next";
-import {
-  ArticleResponse,
-  getArticle,
-  getArticleList,
-} from "../../../api-client";
-import { ArticleContent } from "../../components/content/articles/[articleId]";
+import { ArticleResponse, getArticle, getArticleList } from "../../api-client";
+import { ArticleContent } from "../components/content/articles/[articleId]";
 
 type ArticleProps = {
   article: ArticleResponse;
@@ -13,7 +9,7 @@ type ArticleProps = {
 export const getStaticPaths = async () => {
   const articleList = await getArticleList.handler({});
   return {
-    paths: articleList.map((article) => `/articles/${article.id}`),
+    paths: articleList.map((article) => `/${article.id}`),
     fallback: false,
   };
 };
