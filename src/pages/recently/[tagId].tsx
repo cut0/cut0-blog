@@ -22,9 +22,18 @@ export const getStaticProps = async ({
   const [articleList, tagList] = await Promise.all([
     getArticleList.handler({
       fields,
-      filters: `(tags[contains]${tagId})`,
+      filters: `(tags[contains]${tagId})${
+        process.env.NODE_ENV === "production"
+          ? "[and](isPublic[equals]true)"
+          : ""
+      }`,
     }),
-    getTagList.handler({}),
+    getTagList.handler({
+      filters:
+        process.env.NODE_ENV === "production"
+          ? "(isPublic[equals]true)"
+          : undefined,
+    }),
   ]);
 
   return {

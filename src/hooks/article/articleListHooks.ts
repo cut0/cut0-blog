@@ -22,7 +22,9 @@ const fetcher = ({ category, tagId }: ReturnType<typeof getKey>) => {
   if (tagId) {
     filterStrList.push(`(tags[contains]${tagId})`);
   }
-
+  if (process.env.NODE_ENV === "production") {
+    filterStrList.push("(isPublic[equals]true)");
+  }
   if (filterStrList.length > 0) {
     return getArticleList.handler({
       filters: filterStrList.join("[and]"),
