@@ -6,6 +6,7 @@ const testdata: TagResponse[] = [
   {
     id: "1",
     name: "tag1",
+    isPublic: true,
     createdAt: "",
     updatedAt: "",
     publishedAt: "",
@@ -14,6 +15,7 @@ const testdata: TagResponse[] = [
   {
     id: "2",
     name: "tag2",
+    isPublic: true,
     createdAt: "",
     updatedAt: "",
     publishedAt: "",
@@ -22,6 +24,7 @@ const testdata: TagResponse[] = [
   {
     id: "3",
     name: "tag3",
+    isPublic: true,
     createdAt: "",
     updatedAt: "",
     publishedAt: "",

@@ -1,4 +1,3 @@
-import { mockGetArticleList, mockGetArticle } from "../../mocks";
 import { client } from "../plugins/client";
 import { MicroCMSGETListModel, MicroCMSGETModel } from "../types";
 import { ArticleResponse } from "./types";

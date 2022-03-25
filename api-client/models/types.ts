@@ -16,13 +16,16 @@ export type ArticleResponse = {
   users: UserResponse[];
   eyecatch: Image;
   isPicked: boolean;
+  isPublic: boolean;
 } & MicroCMSDefalut;
 
 export type TagResponse = {
   name: string;
+  isPublic: boolean;
 } & MicroCMSDefalut;
 
 export type UserResponse = {
   name: string;
   eyecatch: Image;
+  description: string;
 } & MicroCMSDefalut;

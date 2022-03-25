@@ -12,6 +12,7 @@ const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
       {
         id: "1",
         name: "tag1",
+        isPublic: true,
         createdAt: "",
         updatedAt: "",
         publishedAt: "",
@@ -20,6 +21,7 @@ const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
       {
         id: "2",
         name: "tag2",
+        isPublic: true,
         createdAt: "",
         updatedAt: "",
         publishedAt: "",
@@ -28,6 +30,7 @@ const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
       {
         id: "3",
         name: "tag3",
+        isPublic: true,
         createdAt: "",
         updatedAt: "",
         publishedAt: "",
@@ -43,22 +46,24 @@ const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
           height: 512,
           width: 512,
         },
+        description: "しがない学生エンジニアです",
         createdAt: "",
         updatedAt: "",
         publishedAt: "",
         revisedAt: "",
       },
     ],
-    createdAt: "",
-    updatedAt: "",
-    publishedAt: "2022-12-26",
-    revisedAt: "",
     eyecatch: {
       url: "https://placehold.jp/150x150.png",
       height: 512,
       width: 512,
     },
     isPicked: true,
+    isPublic: true,
+    createdAt: "",
+    updatedAt: "",
+    publishedAt: "2022-12-26",
+    revisedAt: "",
   };
 });
 

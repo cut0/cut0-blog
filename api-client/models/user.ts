@@ -1,6 +1,5 @@
 import { client } from "../plugins/client";
 import { MicroCMSGETListModel, MicroCMSGETModel } from "../types";
-import { mockGetUserList, mockGetUser } from "../../mocks";
 import { UserResponse } from "./types";
 
 const GET_USER_LIST_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getUserList`;
