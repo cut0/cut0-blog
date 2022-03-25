@@ -118,7 +118,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
                   router.pathname === "/pick-up/[tagId]"
                 ) {
                   router.push({
-                    pathname: `/pick-up/${e?.value ? `/${e?.value}` : ""}`,
+                    pathname: `/pick-up${e?.value ? `/${e?.value}` : ""}`,
                   });
                 }
               }}
