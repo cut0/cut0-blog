@@ -8,7 +8,6 @@ import {
   ArticleContainer,
   Article,
   ArticleTitle,
-  ArticleBody,
   ArticleUserContainer,
 } from "./ArticleContent.css";
 

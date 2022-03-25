@@ -23,8 +23,6 @@ export const ArticleTitle = style({
   margin: 0,
 });
 
-export const ArticleBody = style({});
-
 export const ArticleUserContainer = style({
   paddingTop: "40px",
   position: "relative",
