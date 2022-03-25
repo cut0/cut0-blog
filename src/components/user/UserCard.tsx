@@ -31,12 +31,7 @@ export const UserCard: VFC<UserCardProps> = ({ user }) => {
       </div>
       <div className={UserInfo}>
         <span className={UserName}>{user.name}</span>
-        <p className={UserDescription}>
-          CEO of Crescware Inc.
-          音楽を聴く人、弾く人、作る人をWebで豊かにする会社 /
-          Webで音楽活動する方をもっと充実させるためのサービスを開発中 /
-          音楽学校講師→作編曲家→Webデベロッパー→創業
-        </p>
+        <p className={UserDescription}>{user.description}</p>
       </div>
     </div>
   );
