@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { ArticleResponse, getArticleList } from "../../../api-client";
+import { createArticleFilter } from "../../modules/articleFilter";
 
 type FilterOptions = {
   category: "recently" | "pick-up";
@@ -15,22 +16,9 @@ const getKey = ({ category, tagId }: FilterOptions) => {
 };
 
 const fetcher = ({ category, tagId }: ReturnType<typeof getKey>) => {
-  const filterStrList: string[] = [];
-  if (category === "pick-up") {
-    filterStrList.push("(isPicked[equals]true)");
-  }
-  if (tagId) {
-    filterStrList.push(`(tags[contains]${tagId})`);
-  }
-  if (process.env.NODE_ENV === "production") {
-    filterStrList.push("(isPublic[equals]true)");
-  }
-  if (filterStrList.length > 0) {
-    return getArticleList.handler({
-      filters: filterStrList.join("[and]"),
-    });
-  }
-  return getArticleList.handler({});
+  return getArticleList.handler({
+    filters: createArticleFilter({ category, tagId }),
+  });
 };
 
 export const useArticleList = (

@@ -2,6 +2,7 @@ import type { NextPage, GetStaticPropsResult } from "next";
 import markdownToHtml from "zenn-markdown-html";
 import { ArticleResponse, getArticle, getArticleList } from "../../api-client";
 import { ArticleContent } from "../components/content/articles/ArticleContent";
+import { createArticleFilter } from "../modules/articleFilter";
 
 type ArticleProps = {
   article: ArticleResponse;
@@ -9,10 +10,7 @@ type ArticleProps = {
 
 export const getStaticPaths = async () => {
   const articleList = await getArticleList.handler({
-    filters:
-      process.env.NODE_ENV === "production"
-        ? "(isPublic[equals]true)"
-        : undefined,
+    filters: createArticleFilter({ category: "recently" }),
   });
   return {
     paths: articleList.map((article) => `/${article.id}`),
