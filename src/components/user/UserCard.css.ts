@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { colorPalet } from "../../utils/color";
 
 export const Content = style({
   display: "grid",
@@ -14,11 +15,11 @@ export const EyecatchContainer = style({
 
 export const UserEyecatch = style({
   borderRadius: "50%",
-  backgroundColor: "#939CA3",
+  backgroundColor: `${colorPalet.loadingBackground}`,
 });
 
 export const UserInfo = style({});
 
 export const UserName = style({ fontWeight: "bold" });
 
-export const UserDescription = style({ color: "#B7B8C0" });
+export const UserDescription = style({ color: `${colorPalet.subText}` });

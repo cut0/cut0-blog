@@ -1,17 +1,21 @@
 import { style } from "@vanilla-extract/css";
+import { colorPalet } from "../../utils/color";
 
 export const errorToastContent = style({
   display: "flex",
   alignItems: "center",
   padding: "16px",
-  backgroundColor: "#E53E3E",
+  backgroundColor: `${colorPalet.error}`,
   borderRadius: "16px",
 });
 
-export const closeIconContainer = style({ color: "white", cursor: "pointer" });
+export const closeIconContainer = style({
+  color: `${colorPalet.lightText}`,
+  cursor: "pointer",
+});
 
 export const errorMessage = style({
   margin: 0,
-  color: "white",
+  color: `${colorPalet.lightText}`,
   paddingLeft: "8px",
 });

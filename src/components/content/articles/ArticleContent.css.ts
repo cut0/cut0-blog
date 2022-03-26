@@ -1,7 +1,8 @@
 import { style } from "@vanilla-extract/css";
+import { colorPalet } from "../../../utils/color";
 
 export const ArticleWrapper = style({
-  backgroundColor: "#EAEAEA",
+  backgroundColor: `${colorPalet.lightBackground}`,
   minHeight: "calc(100vh - 52px)",
 });
 
@@ -13,7 +14,7 @@ export const ArticleContainer = style({
 
 export const Article = style({
   borderRadius: "16px",
-  backgroundColor: "white",
+  backgroundColor: `${colorPalet.hightLightBackground}`,
   padding: "40px",
 });
 
@@ -38,7 +39,7 @@ export const ArticleUserContainer = style({
       width: "100%",
       height: "2px",
       position: "absolute",
-      backgroundColor: "#E4EDF4",
+      backgroundColor: `${colorPalet.borderBackground}`,
       top: 0,
     },
   },

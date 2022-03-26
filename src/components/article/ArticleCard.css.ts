@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { colorPalet } from "../../utils/color";
 
 export const Card = style({
   borderRadius: "16px",
@@ -8,7 +9,7 @@ export const Card = style({
   boxShadow: "0 1px 10px -4px #c6c8ca",
   ":hover": {
     transform: "scale(1.05, 1.05)",
-    color: "#0697F9",
+    color: `${colorPalet.linkText}`,
   },
 });
 
@@ -19,7 +20,7 @@ export const ArticleBookmarkContainer = style({
   borderRadius: "0 16px 0 16px",
   width: "64px",
   height: "64px",
-  backgroundColor: "white",
+  backgroundColor: `${colorPalet.hightLightBackground}`,
   zIndex: 1,
   display: "flex",
   justifyContent: "center",
@@ -33,12 +34,12 @@ export const ArticleEyecatchContainer = style({
 });
 
 export const ArticleEyecatch = style({
-  backgroundColor: "#939CA3",
+  backgroundColor: `${colorPalet.loadingBackground}`,
   borderRadius: "16px 16px 0 0",
 });
 
 export const ArticleInfoContainer = style({
-  backgroundColor: "white",
+  backgroundColor: `${colorPalet.hightLightBackground}`,
   padding: "16px",
   borderRadius: "0 0 16px 16px",
 });
@@ -58,7 +59,7 @@ export const ArticleTagsContainer = style({
 
 export const ArticleTag = style({
   fontSize: "0.875rem",
-  color: "#0697F9",
+  color: `${colorPalet.linkText}`,
   paddingRight: "8px",
 });
 
@@ -76,7 +77,7 @@ export const UserEyecatchContainer = style({
 
 export const UserEyecatch = style({
   borderRadius: "50%",
-  backgroundColor: "#939CA3",
+  backgroundColor: `${colorPalet.loadingBackground}`,
 });
 
 export const UserInfo = style({
@@ -87,10 +88,8 @@ export const UserInfo = style({
 
 export const UserName = style({
   fontSize: "0.875rem",
-  color: "initial",
 });
 
 export const PublishedAt = style({
   fontSize: "0.75rem",
-  color: "initial",
 });

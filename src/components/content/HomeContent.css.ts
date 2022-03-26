@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { colorPalet } from "../../utils/color";
 
 export const ErrorToastContainer = style({
   position: "absolute",
@@ -10,7 +11,7 @@ export const ErrorToastContainer = style({
 });
 
 export const NavWrapper = style({
-  backgroundColor: "#2B2B2E",
+  backgroundColor: `${colorPalet.darkBackground}`,
   position: "sticky",
   top: 0,
   zIndex: 100,
@@ -40,13 +41,13 @@ export const NavLinkElement = style({
 });
 
 export const SelectedNavElement = style({
-  color: "white",
+  color: `${colorPalet.lightText}`,
   "::after": {
     content: "",
     position: "absolute",
     left: 0,
     bottom: 0,
-    backgroundColor: "white",
+    backgroundColor: `${colorPalet.hightLightBackground}`,
     height: "2px",
     width: "100%",
   },
@@ -55,7 +56,7 @@ export const SelectedNavElement = style({
 export const NavSearchContainer = style({ padding: "8px 0" });
 
 export const ArticleListWrapper = style({
-  backgroundColor: "#EAEAEA",
+  backgroundColor: `${colorPalet.lightBackground}`,
   minHeight: "100vh",
   paddingTop: "8px",
 });

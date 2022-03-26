@@ -1,5 +1,6 @@
 import { globalStyle } from "@vanilla-extract/css";
+import { colorPalet } from "../utils/color";
 
 globalStyle("html, body", {
-  color: "#2B2B2E",
+  color: `${colorPalet.text}`,
 });
