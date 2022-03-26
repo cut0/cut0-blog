@@ -42,12 +42,12 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
           <Image
             alt="ブログの画像"
             className={ArticleEyecatch}
-            height={article.eyecatch.height}
             layout="fill"
-            loading="lazy"
+            // height={article.eyecatch.height}
             objectFit="cover"
             src={article.eyecatch.url}
-            width={article.eyecatch.width}
+            priority
+            // width={article.eyecatch.width}
           />
         </div>
         <div className={ArticleInfoContainer}>
@@ -66,12 +66,12 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
               <Image
                 alt="筆者のアイコン"
                 className={UserEyecatch}
-                height={article.users[0].eyecatch.height}
+                // height={article.users[0].eyecatch.height}
                 layout="fill"
                 loading="lazy"
                 objectFit="cover"
                 src={article.users[0].eyecatch.url}
-                width={article.users[0].eyecatch.width}
+                // width={article.users[0].eyecatch.width}
               />
             </div>
             <div className={UserInfo}>

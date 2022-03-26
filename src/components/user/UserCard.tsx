@@ -21,12 +21,12 @@ export const UserCard: VFC<UserCardProps> = ({ user }) => {
         <Image
           alt="筆者のアイコン"
           className={UserEyecatch}
-          height={user.eyecatch.height}
+          // height={user.eyecatch.height}
           layout="fill"
           loading="lazy"
           objectFit="cover"
           src={user.eyecatch.url}
-          width={user.eyecatch.width}
+          // width={user.eyecatch.width}
         />
       </div>
       <div className={UserInfo}>
