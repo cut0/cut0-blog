@@ -1,8 +1,8 @@
 import "zenn-content-css";
 import { VFC } from "react";
-import { ArticleResponse } from "../../../../api-client";
-import { formatDate } from "../../../utils/date";
-import { UserCard } from "../../user/UserCard";
+import { ArticleResponse } from "../../../api-client";
+import { formatDate } from "../../utils/date";
+import { UserCard } from "../user/UserCard";
 import {
   ArticleWrapper,
   ArticleContainer,
