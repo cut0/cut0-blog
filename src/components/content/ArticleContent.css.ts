@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { colorPalet } from "../../../utils/color";
+import { colorPalet } from "../../utils/color";
 
 export const ArticleWrapper = style({
   backgroundColor: `${colorPalet.lightBackground}`,

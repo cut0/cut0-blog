@@ -13,6 +13,7 @@ import {
 } from "../../utils/pagePath";
 import { ArticleCard } from "../article/ArticleCard";
 import { ErrorToast } from "../common/ErrorToast";
+import { SeoLayout } from "../layout/Seo";
 import {
   ErrorToastContainer,
   ArticleListWrapper,
@@ -61,87 +62,91 @@ export const HomeContent: VFC<HomeContentProps> = ({
   const router = useRouter();
 
   return (
-    <>
-      {showErrorToast && (
-        <div className={ErrorToastContainer}>
-          <ErrorToast
-            closeHandler={() => setShowErrorToast(false)}
-            message="データ取得時にエラーが発生しました。"
-          />
-        </div>
-      )}
-      <nav className={NavWrapper}>
-        <div className={NavContainer}>
-          <div className={NavLinksContainer}>
-            <Link href={recentlyTagPath({ tagId })} scroll={false}>
-              <a
-                className={`${NavLinkElement} ${
-                  category === "recently" ? SelectedNavElement : ""
-                }`}
-              >
-                Recently
-              </a>
-            </Link>
-            <Link href={pickUpTagPath({ tagId })} scroll={false}>
-              <a
-                className={`${NavLinkElement} ${
-                  category === "pick-up" ? SelectedNavElement : ""
-                }`}
-              >
-                Pick Up
-              </a>
-            </Link>
-          </div>
-          <div className={NavSearchContainer}>
-            <Select
-              aria-label="tag選択"
-              defaultValue={tagOptions.find((tag) => tag.value === tagId)}
-              id="TagSelectBox"
-              instanceId="TagSelectBox"
-              name="tags"
-              options={tagOptions}
-              placeholder="タグを選択"
-              closeMenuOnScroll
-              closeMenuOnSelect
-              isClearable
-              onChange={(e) => {
-                if (!e?.value) {
-                  router.push(homePath());
-                  return;
-                }
-                if (
-                  router.asPath === homePath() ||
-                  router.asPath === recentlyPath() ||
-                  router.asPath === recentlyTagPath({ tagId })
-                ) {
-                  router.push({
-                    pathname: recentlyTagPath({ tagId: e.value }),
-                  });
-                }
-                if (
-                  router.pathname === pickUpPath() ||
-                  router.pathname === pickUpTagPath({ tagId })
-                ) {
-                  router.push(pickUpTagPath({ tagId: e.value }));
-                }
-              }}
+    <SeoLayout ogp={{ pageType: "website" }} twitter={{ card: "summary" }}>
+      <>
+        {showErrorToast && (
+          <div className={ErrorToastContainer}>
+            <ErrorToast
+              closeHandler={() => setShowErrorToast(false)}
+              message="データ取得時にエラーが発生しました。"
             />
           </div>
+        )}
+        <nav className={NavWrapper}>
+          <div className={NavContainer}>
+            <div className={NavLinksContainer}>
+              <Link href={recentlyTagPath({ tagId })} scroll={false}>
+                <a
+                  className={`${NavLinkElement} ${
+                    category === "recently" ? SelectedNavElement : ""
+                  }`}
+                >
+                  Recently
+                </a>
+              </Link>
+              <Link href={pickUpTagPath({ tagId })} scroll={false}>
+                <a
+                  className={`${NavLinkElement} ${
+                    category === "pick-up" ? SelectedNavElement : ""
+                  }`}
+                >
+                  Pick Up
+                </a>
+              </Link>
+            </div>
+            <div className={NavSearchContainer}>
+              <Select
+                aria-label="tag選択"
+                defaultValue={tagOptions.find((tag) => tag.value === tagId)}
+                id="TagSelectBox"
+                instanceId="TagSelectBox"
+                name="tags"
+                options={tagOptions}
+                placeholder="タグを選択"
+                closeMenuOnScroll
+                closeMenuOnSelect
+                isClearable
+                onChange={(e) => {
+                  if (!e?.value) {
+                    router.push(homePath());
+                    return;
+                  }
+                  if (
+                    router.asPath === homePath() ||
+                    router.asPath === recentlyPath() ||
+                    router.asPath === recentlyTagPath({ tagId })
+                  ) {
+                    router.push({
+                      pathname: recentlyTagPath({ tagId: e.value }),
+                    });
+                  }
+                  if (
+                    router.pathname === pickUpPath() ||
+                    router.pathname === pickUpTagPath({ tagId })
+                  ) {
+                    router.push(pickUpTagPath({ tagId: e.value }));
+                  }
+                }}
+              />
+            </div>
+          </div>
+        </nav>
+        <div className={ArticleListWrapper}>
+          <div className={ArticleListContainer}>
+            {articleList && articleList?.length < 1 && (
+              <p>データがありません</p>
+            )}
+            {articleList &&
+              articleList.map((article, index) => {
+                return (
+                  <section className={ArticleContainer} key={index}>
+                    <ArticleCard article={article} />
+                  </section>
+                );
+              })}
+          </div>
         </div>
-      </nav>
-      <div className={ArticleListWrapper}>
-        <div className={ArticleListContainer}>
-          {articleList && articleList?.length < 1 && <p>データがありません</p>}
-          {articleList &&
-            articleList.map((article, index) => {
-              return (
-                <section className={ArticleContainer} key={index}>
-                  <ArticleCard article={article} />
-                </section>
-              );
-            })}
-        </div>
-      </div>
-    </>
+      </>
+    </SeoLayout>
   );
 };
