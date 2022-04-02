@@ -1,18 +1,15 @@
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { VFC } from "react";
+import { homePath } from "../../utils/pagePath";
 import { HeaderWrapper, HeaderContainer, HeaderTitle } from "./Header.css";
 
 export const Header: VFC<{}> = () => {
-  const router = useRouter();
   return (
     <header className={HeaderWrapper}>
       <div className={HeaderContainer}>
-        <h1
-          className={HeaderTitle}
-          onClick={() => router.push({ pathname: "/" })}
-        >
-          Cut0 Blog
-        </h1>
+        <Link href={homePath()} passHref>
+          <h1 className={HeaderTitle}>Cut0 Blog</h1>
+        </Link>
       </div>
     </header>
   );

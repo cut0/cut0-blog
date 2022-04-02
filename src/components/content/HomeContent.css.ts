@@ -66,7 +66,7 @@ export const ArticleListContainer = style({
   margin: "0 auto",
   display: "grid",
   gap: 0,
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
 });
 
 export const ArticleContainer = style({ padding: "8px" });

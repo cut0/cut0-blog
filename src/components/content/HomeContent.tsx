@@ -4,6 +4,13 @@ import { useEffect, useMemo, useState, VFC } from "react";
 import Select from "react-select";
 import { ArticleResponse, TagResponse } from "../../../api-client";
 import { useArticleList } from "../../hooks/article";
+import {
+  homePath,
+  pickUpPath,
+  pickUpTagPath,
+  recentlyPath,
+  recentlyTagPath,
+} from "../../utils/pagePath";
 import { ArticleCard } from "../article/ArticleCard";
 import { ErrorToast } from "../common/ErrorToast";
 import {
@@ -40,7 +47,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
     [tagList],
   );
 
-  const { articleList, error, loading } = useArticleList(
+  const { articleList, error } = useArticleList(
     { category, tagId },
     baseArticleList,
   );
@@ -66,10 +73,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
       <nav className={NavWrapper}>
         <div className={NavContainer}>
           <div className={NavLinksContainer}>
-            <Link
-              href={{ pathname: `/recently${tagId ? `/${tagId}` : ""}` }}
-              scroll={false}
-            >
+            <Link href={recentlyTagPath({ tagId })} scroll={false}>
               <a
                 className={`${NavLinkElement} ${
                   category === "recently" ? SelectedNavElement : ""
@@ -78,10 +82,7 @@ export const HomeContent: VFC<HomeContentProps> = ({
                 Recently
               </a>
             </Link>
-            <Link
-              href={{ pathname: `/pick-up${tagId ? `/${tagId}` : ""}` }}
-              scroll={false}
-            >
+            <Link href={pickUpTagPath({ tagId })} scroll={false}>
               <a
                 className={`${NavLinkElement} ${
                   category === "pick-up" ? SelectedNavElement : ""
@@ -104,22 +105,24 @@ export const HomeContent: VFC<HomeContentProps> = ({
               closeMenuOnSelect
               isClearable
               onChange={(e) => {
+                if (!e?.value) {
+                  router.push(homePath());
+                  return;
+                }
                 if (
-                  router.pathname === "/" ||
-                  router.pathname === "/recently" ||
-                  router.pathname === "/recently/[tagId]"
+                  router.asPath === homePath() ||
+                  router.asPath === recentlyPath() ||
+                  router.asPath === recentlyTagPath({ tagId })
                 ) {
                   router.push({
-                    pathname: `/recently${e?.value ? `/${e?.value}` : ""}`,
+                    pathname: recentlyTagPath({ tagId: e.value }),
                   });
                 }
                 if (
-                  router.pathname === "/pick-up" ||
-                  router.pathname === "/pick-up/[tagId]"
+                  router.pathname === pickUpPath() ||
+                  router.pathname === pickUpTagPath({ tagId })
                 ) {
-                  router.push({
-                    pathname: `/pick-up${e?.value ? `/${e?.value}` : ""}`,
-                  });
+                  router.push(pickUpTagPath({ tagId: e.value }));
                 }
               }}
             />
