@@ -35,13 +35,11 @@ export const getStaticProps = async (): Promise<
 
 const Page: NextPage<HomeProps> = ({ articleList, tagList }) => {
   return (
-    <>
-      <HomeContent
-        baseArticleList={articleList}
-        category="recently"
-        tagList={tagList}
-      />
-    </>
+    <HomeContent
+      baseArticleList={articleList}
+      category="recently"
+      tagList={tagList}
+    />
   );
 };
 

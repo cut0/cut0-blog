@@ -32,11 +32,7 @@ export const getStaticProps = async ({
 };
 
 const Article: NextPage<ArticleProps> = ({ article }) => {
-  return (
-    <>
-      <ArticleContent article={article}></ArticleContent>
-    </>
-  );
+  return <ArticleContent article={article}></ArticleContent>;
 };
 
 export default Article;

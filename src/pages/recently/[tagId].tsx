@@ -46,14 +46,12 @@ export const getStaticPaths = async () => {
 
 const Page: NextPage<HomeProps> = ({ articleList, tagList, tagId }) => {
   return (
-    <>
-      <HomeContent
-        baseArticleList={articleList}
-        category="recently"
-        tagId={tagId}
-        tagList={tagList}
-      />
-    </>
+    <HomeContent
+      baseArticleList={articleList}
+      category="recently"
+      tagId={tagId}
+      tagList={tagList}
+    />
   );
 };
 
