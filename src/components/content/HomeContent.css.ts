@@ -65,8 +65,11 @@ export const ArticleListContainer = style({
   maxWidth: "900px",
   margin: "0 auto",
   display: "grid",
+  justifyContent: "center",
   gap: 0,
-  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill, 300px)",
 });
 
-export const ArticleContainer = style({ padding: "8px" });
+export const ArticleContainer = style({
+  padding: "6px",
+});

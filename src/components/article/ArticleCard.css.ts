@@ -28,7 +28,7 @@ export const ArticleBookmarkContainer = style({
 });
 
 export const ArticleEyecatchContainer = style({
-  height: "192px",
+  height: "162px",
   position: "relative",
   borderRadius: "16px 16px 0 0",
 });

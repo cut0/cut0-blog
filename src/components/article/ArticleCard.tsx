@@ -38,9 +38,9 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
             alt="ブログの画像"
             className={ArticleEyecatch}
             layout="fill"
+            loading="lazy"
             objectFit="cover"
             src={article.eyecatch.url}
-            priority
           />
         </div>
         <div className={ArticleInfoContainer}>

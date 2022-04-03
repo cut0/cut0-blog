@@ -2,10 +2,10 @@ const colors = {
   white: "#FFFFFF",
   white2: "#E4EDF4",
   white3: "#EAEAEA",
-  blue: "#0697F9",
+  blue: "#0061D3",
   red: "#E53E3E",
   gray1: "#939CA3",
-  gray2: "#B7B8C0",
+  gray2: "#575860",
   black: "#2B2B2E",
 };
 
