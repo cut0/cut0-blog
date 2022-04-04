@@ -73,7 +73,7 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
             <div className={UserInfo}>
               <span className={UserName}>{article.users[0].name}</span>
               <span className={PublishedAt}>
-                {formatDate(article.users[0].publishedAt)}投稿
+                {formatDate(article.publishedAt)}投稿
               </span>
             </div>
           </div>
