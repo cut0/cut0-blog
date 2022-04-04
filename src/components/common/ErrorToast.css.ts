@@ -10,6 +10,7 @@ export const errorToastContent = style({
 });
 
 export const closeIconContainer = style({
+  minWidth: "24px",
   color: `${colorPalet.lightText}`,
   cursor: "pointer",
 });
