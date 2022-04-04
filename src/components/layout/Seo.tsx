@@ -68,7 +68,6 @@ export const SeoLayout: VFC<PropsWithChildren<SeoLayoutProps>> = ({
         <meta content={imgUrl} property="twitter:image" />
         <meta content={url} property="twitter:domain" />
         {/*canonical */}
-        <link href={url} rel="canonical" />
       </Head>
       {children}
     </>
