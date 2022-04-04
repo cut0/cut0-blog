@@ -17,10 +17,8 @@ type HomeProps = {
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<HomeProps>
 > => {
-  const fields = "description,title,tags,users,eyecatch,isPicked";
   const [articleList, tagList] = await Promise.all([
     getArticleList.handler({
-      fields,
       filters: createArticleFilter({ category: "recently" }),
     }),
     getTagList.handler({

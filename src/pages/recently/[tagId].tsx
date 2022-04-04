@@ -20,10 +20,8 @@ export const getStaticProps = async ({
 }: {
   params: { tagId: string };
 }): Promise<GetStaticPropsResult<HomeProps>> => {
-  const fields = "description,title,tags,users,eyecatch,isPicked";
   const [articleList, tagList] = await Promise.all([
     getArticleList.handler({
-      fields,
       filters: createArticleFilter({ category: "recently", tagId }),
     }),
     getTagList.handler({
