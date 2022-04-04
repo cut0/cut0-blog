@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlagList, getFeatureFlag } from "../../modules/featureFlag";
+import { FlagList, getFeatureFlag } from "../../utils/featureFlag";
 
 export const useFeatureFlag = () => {
   const [state, setState] = useState<FlagList>(getFeatureFlag());
