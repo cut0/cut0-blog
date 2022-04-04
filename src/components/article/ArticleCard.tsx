@@ -5,6 +5,7 @@ import { ArticleResponse } from "../../../api-client";
 import Bookmark from "../../../assets/bookmark.svg";
 import { formatDate } from "../../utils/date";
 import { articlePath } from "../../utils/pagePath";
+import { useFeatureFlag } from "../../hooks/common/featureFlagHooks";
 import {
   Card,
   ArticleBookmarkContainer,
@@ -27,12 +28,16 @@ type ArticleCardProps = {
 };
 
 export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
+  const [featureFlagList] = useFeatureFlag();
+
   return (
     <Link href={articlePath({ articleId: article.id })} passHref>
       <article className={Card}>
-        <div className={ArticleBookmarkContainer}>
-          <Bookmark />
-        </div>
+        {featureFlagList.favoriteArticle && (
+          <div className={ArticleBookmarkContainer}>
+            <Bookmark />
+          </div>
+        )}
         <div className={ArticleEyecatchContainer}>
           <Image
             alt="ブログの画像"
