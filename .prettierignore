@@ -2,3 +2,5 @@ node_modules
 **/.next/**
 **/_next/**
 **/dist/**
+serviceWorker.js
+registerServiceWorker.js

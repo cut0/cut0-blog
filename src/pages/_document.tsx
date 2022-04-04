@@ -11,17 +11,13 @@ class Document extends NextDocument<{}> {
             rel="apple-touch-icon"
             sizes="180x180"
           />
-          {/* <link href="/favicons/site.webmanifest" rel="manifest" /> */}
-          {/* <link
-            color="#000000"
-            href="/favicons/safari-pinned-tab.svg"
-            rel="mask-icon"
-          /> */}
+          <link href="/manifest.json" rel="manifest" />
           <meta content="#2B2B2E" name="theme-color" />
         </Head>
         <body>
           <Main />
           <NextScript />
+          <script src="/registerServiceWorker.js" defer />
         </body>
       </Html>
     );
