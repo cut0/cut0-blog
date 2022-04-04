@@ -19,7 +19,7 @@ const DEFAULT_URL = "";
 const DEFAULT_TITLE = "Cut0 Blog";
 const DEFAULT_DESCRIPTION =
   "理科大に所属しながら主にWebフロントエンドの領域で学生エンジニアをしています。日々の学習や出来事を発信します。";
-const DEFAULT_IMG = "";
+const DEFAULT_IMG = "/cut0-blog.png";
 const DEFAULT_TWITTER_CREATOR = "@_Cut0";
 
 export const SeoLayout: VFC<PropsWithChildren<SeoLayoutProps>> = ({
