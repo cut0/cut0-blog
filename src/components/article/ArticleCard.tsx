@@ -40,7 +40,7 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
         )}
         <div className={ArticleEyecatchContainer}>
           <Image
-            alt="ブログの画像"
+            alt={`${article.title} eyecatch`}
             className={ArticleEyecatch}
             layout="fill"
             loading="lazy"
@@ -62,7 +62,7 @@ export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
           <div className={UserInfoContainer}>
             <div className={UserEyecatchContainer}>
               <Image
-                alt="筆者のアイコン"
+                alt={`${article.users[0].name} icon`}
                 className={UserEyecatch}
                 layout="fill"
                 loading="lazy"

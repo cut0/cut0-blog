@@ -20,7 +20,7 @@ export const Article = style({
 
 export const ArticleTitle = style({
   textAlign: "center",
-  padding: "64px 0 0",
+  padding: "32px 0 0",
   margin: 0,
 });
 

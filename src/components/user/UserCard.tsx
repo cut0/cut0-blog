@@ -19,7 +19,7 @@ export const UserCard: VFC<UserCardProps> = ({ user }) => {
     <div className={Content}>
       <div className={EyecatchContainer}>
         <Image
-          alt="筆者のアイコン"
+          alt={`${user.name} icon`}
           className={UserEyecatch}
           layout="fill"
           loading="lazy"
