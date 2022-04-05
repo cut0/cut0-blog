@@ -2,7 +2,7 @@ import type { NextPage, GetStaticPropsResult } from "next";
 import markdownToHtml from "zenn-markdown-html";
 import { ArticleResponse, getArticle, getArticleList } from "../../api-client";
 import { ArticleContent } from "../components/content/ArticleContent";
-import { createArticleFilter } from "../modules/articleFilter";
+import { createArticleFilter } from "../modules/article/articleFilter";
 
 type ArticleProps = {
   article: ArticleResponse;

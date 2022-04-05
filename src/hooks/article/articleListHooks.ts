@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { ArticleResponse, getArticleList } from "../../../api-client";
-import { createArticleFilter } from "../../modules/articleFilter";
+import { createArticleFilter } from "../../modules/article/articleFilter";
 
 type FilterOptions = {
   category: "recently" | "pick-up";
