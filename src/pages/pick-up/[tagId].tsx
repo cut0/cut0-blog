@@ -6,8 +6,8 @@ import {
   TagResponse,
 } from "../../../api-client";
 import { HomeContent } from "../../components/content/HomeContent";
-import { createArticleFilter } from "../../modules/articleFilter";
-import { createTagFilter } from "../../modules/tagFilter";
+import { createArticleFilter } from "../../modules/article/articleFilter";
+import { createTagFilter } from "../../modules/tag/tagFilter";
 
 type HomeProps = {
   tagId: string;
