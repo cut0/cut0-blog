@@ -4,11 +4,19 @@ import { mockGetArticleList } from "../../../mocks";
 import { SwrTestWrapper } from "../../components/SwrTestWrapper";
 import { useArticleListInfinite } from "./articleListInfiniteHooks";
 
-test("初期状態", async () => {
-  const mock = jest.spyOn(getArticleList, "handler").mockImplementation((x) => {
+const mock = jest.spyOn(getArticleList, "handler");
+
+beforeEach(() => {
+  mock.mockImplementation((x) => {
     return Promise.resolve(mockGetArticleList(x));
   });
+});
 
+afterEach(() => {
+  jest.resetAllMocks();
+});
+
+test("初期状態", async () => {
   const { result } = renderHook(
     () => useArticleListInfinite({ category: "recently" }),
     {
@@ -25,14 +33,12 @@ test("初期状態", async () => {
     loading: true,
   });
 
-  mock.mockRestore();
+  await act(async () => {
+    await Promise.all(mock.mock.instances);
+  });
 });
 
 test("初回レンダリング時", async () => {
-  const mock = jest.spyOn(getArticleList, "handler").mockImplementation((x) => {
-    return Promise.resolve(mockGetArticleList(x));
-  });
-
   const { result } = renderHook(
     () => useArticleListInfinite({ category: "recently" }),
     {
@@ -40,7 +46,9 @@ test("初回レンダリング時", async () => {
     },
   );
 
-  await act(async () => {});
+  await act(async () => {
+    await Promise.all(mock.mock.instances);
+  });
 
   expect(result.current).toEqual({
     articleList: mockGetArticleList({ offset: 0, limit: 10 }),
@@ -50,15 +58,9 @@ test("初回レンダリング時", async () => {
     error: undefined,
     loading: false,
   });
-
-  mock.mockRestore();
 });
 
 test("取得成功時", async () => {
-  const mock = jest.spyOn(getArticleList, "handler").mockImplementation((x) => {
-    return Promise.resolve(mockGetArticleList(x));
-  });
-
   const { result } = renderHook(
     () => useArticleListInfinite({ category: "recently" }),
     {
@@ -69,6 +71,7 @@ test("取得成功時", async () => {
   await act(async () => {
     await result.current.fetchArticleList();
     await result.current.fetchArticleList();
+    await Promise.all(mock.mock.instances);
   });
 
   expect(result.current).toEqual({
@@ -79,14 +82,10 @@ test("取得成功時", async () => {
     error: undefined,
     loading: false,
   });
-
-  mock.mockRestore();
 });
 
 test("取得失敗時", async () => {
-  const mock = jest
-    .spyOn(getArticleList, "handler")
-    .mockRejectedValue(new Error());
+  mock.mockRejectedValue(new Error());
 
   const { result } = renderHook(
     () => useArticleListInfinite({ category: "recently" }),
@@ -97,6 +96,7 @@ test("取得失敗時", async () => {
 
   await act(async () => {
     await result.current.fetchArticleList();
+    await Promise.all(mock.mock.instances);
   });
 
   expect(result.current).toEqual({
@@ -107,6 +107,4 @@ test("取得失敗時", async () => {
     error: new Error(),
     loading: false,
   });
-
-  mock.mockRestore();
 });

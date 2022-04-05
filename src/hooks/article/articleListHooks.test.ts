@@ -4,69 +4,77 @@ import { mockGetArticleList } from "../../../mocks";
 import { SwrTestWrapper } from "../../components/SwrTestWrapper";
 import { useArticleList } from "./articleListHooks";
 
-test("初期状態", async () => {
-  const mock = jest.spyOn(getArticleList, "handler").mockImplementation((x) => {
-    return Promise.resolve(mockGetArticleList(x));
+const mock = jest.spyOn(getArticleList, "handler");
+
+describe(useArticleList.name, () => {
+  beforeEach(() => {
+    mock.mockImplementation((x) => {
+      return Promise.resolve(mockGetArticleList(x));
+    });
   });
 
-  const { result } = renderHook(
-    () => useArticleList({ category: "recently" }),
-    {
-      wrapper: SwrTestWrapper,
-    },
-  );
-
-  expect(result.current).toEqual({
-    articleList: undefined,
-    error: undefined,
-    loading: true,
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
-  mock.mockRestore();
-});
+  test("初期状態", async () => {
+    const { result } = renderHook(
+      () => useArticleList({ category: "recently" }),
+      {
+        wrapper: SwrTestWrapper,
+      },
+    );
 
-test("初回レンダリング時", async () => {
-  const mock = jest.spyOn(getArticleList, "handler").mockImplementation((x) => {
-    return Promise.resolve(mockGetArticleList(x));
+    expect(result.current).toEqual({
+      articleList: undefined,
+      error: undefined,
+      loading: true,
+    });
+
+    await act(async () => {
+      await Promise.all(mock.mock.instances);
+    });
   });
 
-  const { result } = renderHook(
-    () => useArticleList({ category: "recently" }),
-    {
-      wrapper: SwrTestWrapper,
-    },
-  );
+  test("初回レンダリング時", async () => {
+    const { result } = renderHook(
+      () => useArticleList({ category: "recently" }),
+      {
+        wrapper: SwrTestWrapper,
+      },
+    );
 
-  await act(async () => {});
+    await act(async () => {
+      await Promise.all(mock.mock.instances);
+    });
 
-  expect(result.current).toEqual({
-    articleList: mockGetArticleList({}),
-    error: undefined,
-    loading: false,
+    expect(result.current).toEqual({
+      articleList: mockGetArticleList({}),
+      error: undefined,
+      loading: false,
+    });
   });
 
-  mock.mockRestore();
-});
+  test("取得失敗時", async () => {
+    mock.mockImplementation((x) => {
+      return Promise.reject(new Error());
+    });
 
-test("取得失敗時", async () => {
-  const mock = jest
-    .spyOn(getArticleList, "handler")
-    .mockRejectedValue(new Error());
+    const { result } = renderHook(
+      () => useArticleList({ category: "recently" }),
+      {
+        wrapper: SwrTestWrapper,
+      },
+    );
 
-  const { result } = renderHook(
-    () => useArticleList({ category: "recently" }),
-    {
-      wrapper: SwrTestWrapper,
-    },
-  );
+    await act(async () => {
+      await Promise.all(mock.mock.instances);
+    });
 
-  await act(async () => {});
-
-  expect(result.current).toEqual({
-    articleList: undefined,
-    error: new Error(),
-    loading: false,
+    expect(result.current).toEqual({
+      articleList: undefined,
+      error: new Error(),
+      loading: false,
+    });
   });
-
-  mock.mockRestore();
 });
