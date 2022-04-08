@@ -8,7 +8,7 @@ import {
   ArticleWrapper,
   ArticleContainer,
   Article,
-  ArticleTitle,
+  ArticleTitleContainer,
   ArticlePublishedAt,
   ArticleUserContainer,
 } from "./ArticleContent.css";
@@ -32,7 +32,9 @@ export const ArticleContent: VFC<ArticleContentProps> = ({ article }) => {
     >
       <div className={ArticleWrapper}>
         <section className={ArticleContainer}>
-          <h2 className={ArticleTitle}>{article.title}</h2>
+          <h2 className={ArticleTitleContainer}>
+            <span>{article.title}</span>
+          </h2>
           <span className={ArticlePublishedAt}>
             {formatDate(article.publishedAt)}投稿
           </span>
