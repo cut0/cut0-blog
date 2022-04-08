@@ -15,7 +15,7 @@ export const ArticleContainer = style({
 export const Article = style({
   borderRadius: "16px",
   backgroundColor: `${colorPalet.hightLightBackground}`,
-  padding: "40px",
+  padding: "32px",
 });
 
 export const ArticleTitleContainer = style({
