@@ -18,7 +18,9 @@ export const Article = style({
   padding: "40px",
 });
 
-export const ArticleTitle = style({
+export const ArticleTitleContainer = style({
+  display: "flex",
+  justifyContent: "center",
   padding: "48px 32px 0",
   margin: 0,
 });
