@@ -27,3 +27,12 @@ export const UserDescription = style({
   margin: 0,
   color: `${colorPalet.subText}`,
 });
+
+export const UserSNS = style({
+  display: "inline-flex",
+  alignItems: "center",
+  color: `${colorPalet.subText}`,
+  paddingRight: "16px",
+});
+
+export const UserSNSIcon = style({ marginRight: "4px" });
