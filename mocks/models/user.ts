@@ -16,6 +16,8 @@ const testdata: UserResponse[] = [
     publishedAt: "",
     revisedAt: "",
     description: "しがない学生エンジニアです",
+    github: "",
+    twitter: "",
   },
 ];
 

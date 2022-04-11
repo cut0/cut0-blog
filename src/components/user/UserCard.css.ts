@@ -20,6 +20,19 @@ export const UserEyecatch = style({
 
 export const UserInfo = style({});
 
-export const UserName = style({ fontWeight: "bold" });
+export const UserName = style({ fontSize: "1.25rem", fontWeight: "bold" });
 
-export const UserDescription = style({ color: `${colorPalet.subText}` });
+export const UserDescription = style({
+  padding: "8px 0",
+  margin: 0,
+  color: `${colorPalet.subText}`,
+});
+
+export const UserSNS = style({
+  display: "inline-flex",
+  alignItems: "center",
+  color: `${colorPalet.subText}`,
+  paddingRight: "16px",
+});
+
+export const UserSNSIcon = style({ marginRight: "4px" });
