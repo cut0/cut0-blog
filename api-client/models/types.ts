@@ -28,4 +28,6 @@ export type UserResponse = {
   name: string;
   eyecatch: Image;
   description: string;
+  github: string;
+  twitter: string;
 } & MicroCMSDefalut;

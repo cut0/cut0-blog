@@ -51,6 +51,8 @@ const testdata: ArticleResponse[] = [...new Array(100)].map((_, index) => {
         updatedAt: "",
         publishedAt: "",
         revisedAt: "",
+        github: "",
+        twitter: "",
       },
     ],
     eyecatch: {
