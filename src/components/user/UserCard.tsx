@@ -15,6 +15,7 @@ import {
 } from "./UserCard.css";
 import { TwitterSvgIcon } from "../icons/TwitterSvgIcon";
 import { GitHubSvgIcon } from "../icons/GitHubSvgIcon";
+import { WebSvgIcon } from "../icons/WebSvgIcon";
 
 type UserCardProps = {
   user: UserResponse;
@@ -46,6 +47,12 @@ export const UserCard: FC<UserCardProps> = ({ user }) => {
           <a className={UserSNS} target="_blank">
             <TwitterSvgIcon title="Twitter" className={UserSNSIcon} />
             <span>{user.twitter}</span>
+          </a>
+        </Link>
+        <Link href={`https://cut0-portfolio.vercel.app`}>
+          <a className={UserSNS} target="_blank">
+            <WebSvgIcon title="Web" className={UserSNSIcon} width={24} />
+            <span>Portfolio</span>
           </a>
         </Link>
       </div>
