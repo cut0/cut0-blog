@@ -17,7 +17,6 @@
   "dependencies": {
     "@vanilla-extract/css": "^1.9.0",
     "@vanilla-extract/next-plugin": "^2.0.2",
-    "dayjs": "^1.11.0",
     "microcms-js-sdk": "^2.0.0",
     "next": "12.3.1",
     "react": "^18.2.0",
