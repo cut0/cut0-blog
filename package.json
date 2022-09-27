@@ -15,9 +15,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@vanilla-extract/babel-plugin": "^1.1.4",
-    "@vanilla-extract/css": "^1.6.8",
-    "@vanilla-extract/next-plugin": "^2.0.1",
+    "@vanilla-extract/css": "^1.9.0",
+    "@vanilla-extract/next-plugin": "^2.0.2",
     "dayjs": "^1.11.0",
     "microcms-js-sdk": "^2.0.0",
     "next": "12.1.0",
