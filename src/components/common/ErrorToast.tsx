@@ -1,5 +1,5 @@
 import { useEffect, FC } from "react";
-import { CloseSvgIcon } from "../icons/TwitterSvgIcon copy";
+import { CloseSvgIcon } from "../icons/CloseSvgIcon";
 import {
   errorToastContent,
   closeIconContainer,
