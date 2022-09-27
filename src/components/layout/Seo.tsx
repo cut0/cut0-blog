@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, ReactNode } from "react";
 
 type SeoLayoutProps = {
   ogp: {
@@ -13,6 +13,7 @@ type SeoLayoutProps = {
   twitter: {
     card: "summary" | "summary_large_image";
   };
+  children: ReactNode;
 };
 
 const DEFAULT_URL = "https://cut0-blog.vercel.app";
@@ -22,11 +23,7 @@ const DEFAULT_DESCRIPTION =
 const DEFAULT_IMG = `${DEFAULT_URL}/cut0-blog.png`;
 const DEFAULT_TWITTER_CREATOR = "@_Cut0";
 
-export const SeoLayout: FC<PropsWithChildren<SeoLayoutProps>> = ({
-  children,
-  ogp,
-  twitter,
-}) => {
+export const SeoLayout: FC<SeoLayoutProps> = ({ children, ogp, twitter }) => {
   const {
     pageTitle,
     pageDescription,
