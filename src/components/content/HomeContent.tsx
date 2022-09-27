@@ -75,7 +75,7 @@ export const HomeContent: FC<HomeContentProps> = ({
         <nav className={NavWrapper}>
           <div className={NavContainer}>
             <div className={NavLinksContainer}>
-              <Link href={recentlyTagPath({ tagId })} scroll={false}>
+              <Link href={recentlyTagPath({ tagId })} scroll={false} passHref>
                 <a
                   className={`${NavLinkElement} ${
                     category === "recently" ? SelectedNavElement : ""
@@ -84,7 +84,7 @@ export const HomeContent: FC<HomeContentProps> = ({
                   Recently
                 </a>
               </Link>
-              <Link href={pickUpTagPath({ tagId })} scroll={false}>
+              <Link href={pickUpTagPath({ tagId })} scroll={false} passHref>
                 <a
                   className={`${NavLinkElement} ${
                     category === "pick-up" ? SelectedNavElement : ""

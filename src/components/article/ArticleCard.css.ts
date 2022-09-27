@@ -7,7 +7,13 @@ export const Card = style({
   cursor: "pointer",
   transition: "all 0.2s",
   boxShadow: "0 1px 10px -4px #c6c8ca",
+  color: colorPalet.text,
+  display: "block",
   ":hover": {
+    transform: "scale(1.05, 1.05)",
+    color: `${colorPalet.linkText}`,
+  },
+  ":focus": {
     transform: "scale(1.05, 1.05)",
     color: `${colorPalet.linkText}`,
   },

@@ -6,7 +6,5 @@ globalStyle("html, body", {
 });
 
 globalStyle("a", {
-  color: `${colorPalet.text}`,
   textDecoration: "none",
-  outline: "none",
 });

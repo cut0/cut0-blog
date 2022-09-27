@@ -32,7 +32,7 @@ export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
 
   return (
     <Link href={articlePath({ articleId: article.id })} passHref>
-      <article className={Card}>
+      <a className={Card}>
         {featureFlagList.favoriteArticle && (
           <div className={ArticleBookmarkContainer}>
             <BookmarkSvgIcon title="bookmark" />
@@ -72,13 +72,13 @@ export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
             </div>
             <div className={UserInfo}>
               <span className={UserName}>{article.users[0].name}</span>
-              <span className={PublishedAt}>
+              <time className={PublishedAt}>
                 {formatDate(article.publishedAt)}投稿
-              </span>
+              </time>
             </div>
           </div>
         </div>
-      </article>
+      </a>
     </Link>
   );
 };
