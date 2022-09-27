@@ -2,8 +2,6 @@ import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { UserResponse } from "../../../api-client";
-import GitHub from "../../../assets/github.svg";
-import Twitter from "../../../assets/twitter.svg";
 
 import {
   Content,
@@ -15,6 +13,8 @@ import {
   UserSNS,
   UserSNSIcon,
 } from "./UserCard.css";
+import { TwitterSvgIcon } from "../icons/TwitterSvgIcon";
+import { GitHubSvgIcon } from "../icons/GitHubSvgIcon";
 
 type UserCardProps = {
   user: UserResponse;
@@ -38,13 +38,13 @@ export const UserCard: FC<UserCardProps> = ({ user }) => {
         <p className={UserDescription}>{user.description}</p>
         <Link href={`https://github.com/${user.github}`}>
           <a className={UserSNS} target="_blank">
-            <GitHub className={UserSNSIcon} />
+            <GitHubSvgIcon title="GitHub" className={UserSNSIcon} />
             <span>{user.github}</span>
           </a>
         </Link>
         <Link href={`https://twitter.com/${user.twitter}`}>
           <a className={UserSNS} target="_blank">
-            <Twitter className={UserSNSIcon} />
+            <TwitterSvgIcon title="Twitter" className={UserSNSIcon} />
             <span>{user.twitter}</span>
           </a>
         </Link>

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BookmarkSvgIcon } from "../icons/BookmarkSvgIcon";
 import { ArticleResponse } from "../../../api-client";
-import Bookmark from "../../../assets/bookmark.svg";
 import { formatDate } from "../../utils/date";
 import { articlePath } from "../../utils/pagePath";
 import { useFeatureFlag } from "../../hooks/common/featureFlagHooks";
@@ -35,7 +35,7 @@ export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
       <article className={Card}>
         {featureFlagList.favoriteArticle && (
           <div className={ArticleBookmarkContainer}>
-            <Bookmark />
+            <BookmarkSvgIcon title="bookmark" />
           </div>
         )}
         <div className={ArticleEyecatchContainer}>

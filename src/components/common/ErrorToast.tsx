@@ -1,5 +1,5 @@
 import { useEffect, FC } from "react";
-import Close from "../../../assets/close.svg";
+import { CloseSvgIcon } from "../icons/TwitterSvgIcon copy";
 import {
   errorToastContent,
   closeIconContainer,
@@ -23,7 +23,11 @@ export const ErrorToast: FC<ErrorToastProps> = ({ message, closeHandler }) => {
 
   return (
     <div className={errorToastContent}>
-      <Close className={closeIconContainer} onClick={closeHandler} />
+      <CloseSvgIcon
+        title="close"
+        className={closeIconContainer}
+        onClick={closeHandler}
+      />
       <p className={errorMessage}>{message}</p>
     </div>
   );
