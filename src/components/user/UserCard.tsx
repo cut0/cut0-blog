@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { UserResponse } from "../../../api-client";
@@ -20,7 +20,7 @@ type UserCardProps = {
   user: UserResponse;
 };
 
-export const UserCard: VFC<UserCardProps> = ({ user }) => {
+export const UserCard: FC<UserCardProps> = ({ user }) => {
   return (
     <div className={Content}>
       <div className={EyecatchContainer}>

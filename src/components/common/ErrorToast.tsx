@@ -1,4 +1,4 @@
-import { useEffect, VFC } from "react";
+import { useEffect, FC } from "react";
 import Close from "../../../assets/close.svg";
 import {
   errorToastContent,
@@ -11,7 +11,7 @@ type ErrorToastProps = {
   closeHandler: () => void;
 };
 
-export const ErrorToast: VFC<ErrorToastProps> = ({ message, closeHandler }) => {
+export const ErrorToast: FC<ErrorToastProps> = ({ message, closeHandler }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       closeHandler();

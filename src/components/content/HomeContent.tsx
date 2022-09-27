@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState, VFC } from "react";
+import { useEffect, useMemo, useState, FC } from "react";
 import Select from "react-select";
 import { ArticleResponse, TagResponse } from "../../../api-client";
 import { useArticleList } from "../../hooks/article";
@@ -34,7 +34,7 @@ type HomeContentProps = {
   tagId?: string;
 };
 
-export const HomeContent: VFC<HomeContentProps> = ({
+export const HomeContent: FC<HomeContentProps> = ({
   baseArticleList,
   tagList,
   category,

@@ -1,5 +1,5 @@
 import "zenn-content-css";
-import { VFC } from "react";
+import { FC } from "react";
 import { ArticleResponse } from "../../../api-client";
 import { formatDate } from "../../utils/date";
 import { UserCard } from "../user/UserCard";
@@ -17,7 +17,7 @@ type ArticleContentProps = {
   article: ArticleResponse;
 };
 
-export const ArticleContent: VFC<ArticleContentProps> = ({ article }) => {
+export const ArticleContent: FC<ArticleContentProps> = ({ article }) => {
   return (
     <SeoLayout
       ogp={{

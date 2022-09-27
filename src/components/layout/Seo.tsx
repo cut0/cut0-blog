@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { VFC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 
 type SeoLayoutProps = {
   ogp: {
@@ -22,7 +22,7 @@ const DEFAULT_DESCRIPTION =
 const DEFAULT_IMG = `${DEFAULT_URL}/cut0-blog.png`;
 const DEFAULT_TWITTER_CREATOR = "@_Cut0";
 
-export const SeoLayout: VFC<PropsWithChildren<SeoLayoutProps>> = ({
+export const SeoLayout: FC<PropsWithChildren<SeoLayoutProps>> = ({
   children,
   ogp,
   twitter,

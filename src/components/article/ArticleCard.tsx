@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArticleResponse } from "../../../api-client";
@@ -27,7 +27,7 @@ type ArticleCardProps = {
   article: ArticleResponse;
 };
 
-export const ArticleCard: VFC<ArticleCardProps> = ({ article }) => {
+export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
   const [featureFlagList] = useFeatureFlag();
 
   return (
