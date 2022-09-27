@@ -3,6 +3,8 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     disableStaticImages: true,
     domains: ["placehold.jp", "images.microcms-assets.io"],
