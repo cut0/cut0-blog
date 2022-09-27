@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { UserResponse } from "../../../api-client";
 
+import { TwitterSvgIcon } from "../icons/TwitterSvgIcon";
+import { GitHubSvgIcon } from "../icons/GitHubSvgIcon";
+import { WebSvgIcon } from "../icons/WebSvgIcon";
 import {
   Content,
   EyecatchContainer,
@@ -13,9 +16,6 @@ import {
   UserSNS,
   UserSNSIcon,
 } from "./UserCard.css";
-import { TwitterSvgIcon } from "../icons/TwitterSvgIcon";
-import { GitHubSvgIcon } from "../icons/GitHubSvgIcon";
-import { WebSvgIcon } from "../icons/WebSvgIcon";
 
 type UserCardProps = {
   user: UserResponse;
@@ -39,19 +39,19 @@ export const UserCard: FC<UserCardProps> = ({ user }) => {
         <p className={UserDescription}>{user.description}</p>
         <Link href={`https://github.com/${user.github}`}>
           <a className={UserSNS} target="_blank">
-            <GitHubSvgIcon title="GitHub" className={UserSNSIcon} />
+            <GitHubSvgIcon className={UserSNSIcon} title="GitHub" />
             <span>{user.github}</span>
           </a>
         </Link>
         <Link href={`https://twitter.com/${user.twitter}`}>
           <a className={UserSNS} target="_blank">
-            <TwitterSvgIcon title="Twitter" className={UserSNSIcon} />
+            <TwitterSvgIcon className={UserSNSIcon} title="Twitter" />
             <span>{user.twitter}</span>
           </a>
         </Link>
         <Link href={`https://cut0-portfolio.vercel.app`}>
           <a className={UserSNS} target="_blank">
-            <WebSvgIcon title="Web" className={UserSNSIcon} width={24} />
+            <WebSvgIcon className={UserSNSIcon} title="Web" width={24} />
             <span>Portfolio</span>
           </a>
         </Link>

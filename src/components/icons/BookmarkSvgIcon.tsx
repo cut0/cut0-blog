@@ -11,10 +11,10 @@ export const BookmarkSvgIcon: FC<BookmarkSvgIconProps> = ({
 }) => {
   return (
     <svg
-      width="48"
+      fill="none"
       height="48"
       viewBox="0 0 48 48"
-      fill="none"
+      width="48"
       xmlns="http://www.w3.org/2000/svg"
       {...svgProps}
     >

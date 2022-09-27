@@ -24,8 +24,8 @@ export const ErrorToast: FC<ErrorToastProps> = ({ message, closeHandler }) => {
   return (
     <div className={errorToastContent}>
       <CloseSvgIcon
-        title="close"
         className={closeIconContainer}
+        title="close"
         onClick={closeHandler}
       />
       <p className={errorMessage}>{message}</p>
