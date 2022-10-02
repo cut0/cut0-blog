@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FC, PropsWithChildren, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 type SeoLayoutProps = {
   ogp: {
