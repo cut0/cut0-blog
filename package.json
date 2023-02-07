@@ -22,14 +22,15 @@
     "dayjs": "^1.11.5",
     "microcms-js-sdk": "^2.0.0",
     "next": "12.3.1",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.2.2",
     "sanitize.css": "^13.0.0",
     "swr": "^1.3.0",
-    "zenn-content-css": "^0.1.108",
-    "zenn-embed-elements": "^0.1.108",
-    "zenn-markdown-html": "^0.1.108"
+    "zenn-content-css": "^0.1.137",
+    "zenn-embed-elements": "^0.1.137",
+    "zenn-markdown-html": "^0.1.137"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.1",

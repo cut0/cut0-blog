@@ -2,8 +2,8 @@ import "sanitize.css";
 import "sanitize.css/forms.css";
 import "sanitize.css/typography.css";
 import "../styles/global.css";
+import Script from "next/script";
 import type { AppProps } from "next/app";
-import initTwitterScriptInner from "zenn-embed-elements/lib/init-twitter-script-inner";
 import { useEffect } from "react";
 import { Header } from "../components/common/Header";
 import { usePageView } from "../hooks/common/analyticsHooks";
@@ -17,11 +17,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: initTwitterScriptInner,
-        }}
-      />
+      <Script src="https://embed.zenn.studio/js/listen-embed-event.js"></Script>
       <Header />
       <Component {...pageProps} />
     </>
