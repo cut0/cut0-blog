@@ -1,11 +1,9 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BookmarkSvgIcon } from "../icons/BookmarkSvgIcon";
 import { ArticleResponse } from "../../../api-client";
 import { formatDate } from "../../utils/date";
 import { articlePath } from "../../utils/pagePath";
-import { useFeatureFlag } from "../../hooks/common/featureFlagHooks";
 import {
   Card,
   ArticleBookmarkContainer,
@@ -28,16 +26,9 @@ type ArticleCardProps = {
 };
 
 export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
-  const [featureFlagList] = useFeatureFlag();
-
   return (
     <Link href={articlePath({ articleId: article.id })} passHref>
       <a className={Card}>
-        {featureFlagList.favoriteArticle && (
-          <div className={ArticleBookmarkContainer}>
-            <BookmarkSvgIcon title="bookmark" />
-          </div>
-        )}
         <div className={ArticleEyecatchContainer}>
           <Image
             alt={`${article.title} eyecatch`}
