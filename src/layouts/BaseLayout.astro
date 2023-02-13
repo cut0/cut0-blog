@@ -1,0 +1,96 @@
+---
+import "sanitize.css";
+import "sanitize.css/forms.css";
+import "sanitize.css/typography.css";
+import "../styles/global.css";
+import { GA_ID } from "../utils/constants";
+
+interface Props {
+  ogp: {
+    pageTitle?: string;
+    pageDescription?: string;
+    pageImg?: string;
+    pageImgWidth?: number;
+    pageImgHeight?: number;
+    pageType: "website" | "article";
+  };
+  twitter: {
+    card: "summary" | "summary_large_image";
+  };
+}
+
+const {
+  pageTitle,
+  pageDescription,
+  pageImg,
+  pageImgWidth,
+  pageImgHeight,
+  pageType,
+} = Astro.props.ogp;
+
+const { card } = Astro.props.twitter;
+
+const DEFAULT_URL = "https://cut0-blog.vercel.app";
+const DEFAULT_TITLE = "Cut0 Blog";
+const DEFAULT_DESCRIPTION =
+  "理科大に所属しながら主にWebフロントエンドの領域で学生エンジニアをしています。日々の学習や出来事を発信します。";
+const DEFAULT_IMG = `${DEFAULT_URL}/cut0-blog.png`;
+const DEFAULT_TWITTER_CREATOR = "@_Cut0";
+
+const url = `${DEFAULT_URL}`;
+const title = pageTitle ? `${pageTitle} | ${DEFAULT_TITLE}` : DEFAULT_TITLE;
+const description = pageDescription ?? DEFAULT_DESCRIPTION;
+const imgUrl = pageImg ?? DEFAULT_IMG;
+const imgWidth = pageImgWidth ?? 1280;
+const imgHeight = pageImgHeight ?? 640;
+---
+
+<html lang="ja">
+  <head>
+    <link href="/favicons/favicon.ico" rel="icon" />
+    <link href="/cut0-blog-ios.png" rel="apple-touch-icon" sizes="180x180" />
+    <link href="/manifest.json" rel="manifest" />
+    <meta content="#2B2B2E" name="theme-color" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta content="width=device-width,initial-scale=1.0" name="viewport" />
+    <meta content={description} name="description" />
+    <meta content={url} property="og:url" />
+    <meta content={title} property="og:title" />
+    <meta content={title} property="og:site_name" />
+    <meta content={description} property="og:description" />
+    <meta content={pageType} property="og:type" />
+    <meta content={imgUrl} property="og:image" />
+    <meta content={String(imgWidth)} property="og:image:width" />
+    <meta content={String(imgHeight)} property="og:image:height" />
+
+    <meta content={card} name="twitter:card" />
+    <meta content={DEFAULT_TWITTER_CREATOR} name="twitter:creator" />
+    <meta content={title} property="twitter:title" />
+    <meta content={url} property="twitter:url" />
+    <meta content={description} property="twitter:description" />
+    <meta content={imgUrl} property="twitter:image" />
+    <meta content={url} property="twitter:domain" />
+    <script src="https://embed.zenn.studio/js/listen-embed-event.js" async defer
+    ></script>
+    <script src="/registerServiceWorker.js" async defer></script>
+
+    <script
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+      type="text/partytown"
+      async
+    ></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "${GA_ID}", { page_path: window.location.pathname });
+    </script>
+  </head>
+</html><body>
+  <slot />
+</body>

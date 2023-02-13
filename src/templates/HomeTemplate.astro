@@ -1,0 +1,100 @@
+---
+import type { ArticleResponse } from "../../api-client";
+import ArticleCard from "../components/article/ArticleCard.astro";
+
+interface Props {
+  articleList: ArticleResponse[];
+  category: "recently" | "pick-up";
+}
+
+const { articleList, category } = Astro.props;
+---
+
+<style>
+  .nav-container {
+    background-color: #2b2b2e;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-link-list-container {
+    max-width: 900px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .nav-link-element {
+    font-weight: bold;
+    padding: 8px 0 8px 0;
+    margin-right: 16px;
+    position: relative;
+    color: #b7b8c0;
+    text-decoration: none;
+  }
+
+  .selected {
+    color: #fff;
+  }
+
+  .selected::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    height: 2px;
+    width: 100%;
+  }
+
+  .article-list-wrapper {
+    background-color: #eaeaea;
+    min-height: 100vh;
+    padding-top: 8px;
+  }
+
+  .article-list-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 300px);
+  }
+
+  .article-container {
+    padding: 6px;
+  }
+
+  .nav-link-element {
+    cursor: pointer;
+  }
+</style>
+
+<nav class="nav-container">
+  <div class="nav-link-list-container">
+    <a
+      class:list={["nav-link-element", { selected: category === "recently" }]}
+      href="/">Recently</a
+    >
+    <a
+      class:list={["nav-link-element", { selected: category === "pick-up" }]}
+      href="/pick-up">Pick Up</a
+    >
+  </div>
+</nav>
+<main class="article-list-wrapper">
+  <div class="article-list-container">
+    {
+      articleList.map((article) => {
+        return (
+          <section class="article-container">
+            <ArticleCard article={article} />
+          </section>
+        );
+      })
+    }
+  </div>
+</main>

@@ -1,0 +1,11 @@
+html body {
+  color: #2B2B2E;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  cursor: inherit;
+}

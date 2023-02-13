@@ -1,0 +1,22 @@
+---
+import { getArticleList, getTagList } from "../../../api-client";
+import { createArticleFilter } from "../../modules/article/articleFilter";
+import { createTagFilter } from "../../modules/tag/tagFilter";
+import Header from "../../components/common/Header.astro";
+import HomeLayout from "../../layouts/HomeLayout.astro";
+import HomeTemplate from "../../templates/HomeTemplate.astro";
+
+const [articleList] = await Promise.all([
+  getArticleList.handler({
+    filters: createArticleFilter({ category: "pick-up" }),
+  }),
+  getTagList.handler({
+    filters: createTagFilter(),
+  }),
+]);
+---
+
+<HomeLayout>
+  <Header />
+  <HomeTemplate articleList={articleList} category="pick-up" />
+</HomeLayout>

@@ -1,13 +1,14 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "rules": {
-    "react/jsx-sort-props": [
-      "error",
-      {
-        "callbacksLast": true,
-        "shorthandLast": true
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:astro/recommended", "prettier"],
+  "overrides": [
+    {  
+      "files": ["*.astro"],
+      "parser": "astro-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
       }
-    ],
-    "import/order": "error"
-  }
+    }
+  ]
 }

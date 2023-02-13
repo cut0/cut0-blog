@@ -1,8 +1,8 @@
 import { client } from "../plugins/client";
-import { MicroCMSGETListModel, MicroCMSGETModel } from "../types";
-import { UserResponse } from "./types";
+import type { MicroCMSGETListModel, MicroCMSGETModel } from "../types";
+import type { UserResponse } from "./types";
 
-const GET_USER_LIST_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getUserList`;
+const GET_USER_LIST_KEY = `${import.meta.env.PUBLIC_END_POINT}/getUserList`;
 
 export const getUserList: MicroCMSGETListModel<UserResponse[]> = {
   key: GET_USER_LIST_KEY,
@@ -15,7 +15,7 @@ export const getUserList: MicroCMSGETListModel<UserResponse[]> = {
   },
 };
 
-const GET_USER_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getUser`;
+const GET_USER_KEY = `${import.meta.env.PUBLIC_END_POINT}/getUser`;
 
 export const getUser: MicroCMSGETModel<UserResponse> = {
   key: GET_USER_KEY,

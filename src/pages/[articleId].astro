@@ -1,0 +1,26 @@
+---
+import Header from "../components/common/Header.astro";
+import ArticleLayout from "../layouts/ArticleLayout.astro";
+import ArticleTemplate from "../templates/ArticleTemplate.astro";
+
+export async function getStaticPaths() {
+  const articleList = await import("../../article-raws/out.json");
+  return articleList.data.map((article) => {
+    return {
+      params: {
+        articleId: article.id,
+      },
+      props: {
+        article,
+      },
+    };
+  });
+}
+
+const { article } = Astro.props;
+---
+
+<ArticleLayout article={article}>
+  <Header />
+  <ArticleTemplate article={article} />
+</ArticleLayout>

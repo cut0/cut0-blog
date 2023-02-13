@@ -1,0 +1,24 @@
+---
+import type { ArticleResponse } from "../../api-client";
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  article: ArticleResponse;
+}
+
+const { article } = Astro.props;
+---
+
+<BaseLayout
+  ogp={{
+    pageTitle: article.title,
+    pageDescription: article.description,
+    pageImg: article.eyecatch.url,
+    pageImgWidth: article.eyecatch.width,
+    pageImgHeight: article.eyecatch.height,
+    pageType: "article",
+  }}
+  twitter={{ card: "summary_large_image" }}
+>
+  <slot />
+</BaseLayout>

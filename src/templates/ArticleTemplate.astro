@@ -1,0 +1,84 @@
+---
+import type { ArticleResponse } from "../../api-client";
+import UserCard from "../components/user/UserCard.astro";
+import "zenn-content-css";
+import { formatDate } from "../utils/date";
+
+interface Props {
+  article: ArticleResponse;
+}
+
+const { article } = Astro.props;
+const publishedAt = formatDate(article.publishedAt || "");
+---
+
+<style>
+  .article-wrapper {
+    background-color: #eaeaea;
+    min-height: calc(100vh - 52px);
+  }
+
+  .article-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 64px;
+  }
+
+  .article {
+    border-radius: 16px;
+    background-color: #ffffff;
+    padding: 16px;
+  }
+
+  .article-title-container {
+    display: flex;
+    justify-content: center;
+    padding: 48px 32px 0;
+    margin: 0;
+  }
+
+  .article-published-at {
+    display: block;
+    text-align: center;
+    padding: 32px 0;
+  }
+
+  .article-user-container {
+    padding-top: 40px;
+    position: relative;
+  }
+
+  .article-user-container::before {
+    content: "";
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    background-color: #e4edf4;
+    top: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    .article {
+      padding: 32px;
+    }
+  }
+</style>
+
+<div class="article-wrapper">
+  <section class="article-container">
+    <h2 class="article-title-container">
+      <span>{article.title}</span>
+    </h2>
+    <span class="article-published-at"> {publishedAt}投稿</span>
+    <div class="article">
+      <article class="znc" set:html={article.body} />
+      {
+        article.users[0] && (
+          <div class="article-user-container">
+            <UserCard user={article.users[0]} />
+          </div>
+        )
+      }
+    </div>
+  </section>
+</div>

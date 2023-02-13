@@ -28,16 +28,16 @@ jobs:
       - name: test check
         run: yarn test
         env:
-          NEXT_PUBLIC_END_POINT: ${{ secrets.NEXT_PUBLIC_API_KEY }}
-          NEXT_PUBLIC_SERVICE_DOMAIN: ${{ secrets.NEXT_PUBLIC_SERVICE_DOMAIN }}
-          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
-          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID}}
+          PUBLIC_END_POINT: ${{ secrets.PUBLIC_API_KEY }}
+          PUBLIC_SERVICE_DOMAIN: ${{ secrets.PUBLIC_SERVICE_DOMAIN }}
+          PUBLIC_API_KEY: ${{ secrets.PUBLIC_API_KEY }}
+          PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID}}
       - name: lint check
         run: yarn lint
       - name: build check
         env:
-          NEXT_PUBLIC_END_POINT: ${{ secrets.NEXT_PUBLIC_API_KEY }}
-          NEXT_PUBLIC_SERVICE_DOMAIN: ${{ secrets.NEXT_PUBLIC_SERVICE_DOMAIN }}
-          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
-          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID}}
+          PUBLIC_END_POINT: ${{ secrets.PUBLIC_API_KEY }}
+          PUBLIC_SERVICE_DOMAIN: ${{ secrets.PUBLIC_SERVICE_DOMAIN }}
+          PUBLIC_API_KEY: ${{ secrets.PUBLIC_API_KEY }}
+          PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID}}
         run: yarn build

@@ -1,0 +1,91 @@
+---
+import type { UserResponse } from "../../../api-client";
+import { getOptimizedUrl } from "../../utils/imageUrl";
+import GitHubSvgIcon from "../icons/GitHubSvgIcon.astro";
+import TwitterSvgIcon from "../icons/TwitterSvgIcon.astro";
+import WebSvgIcon from "../icons/WebSvgIcon.astro";
+
+interface Props {
+  user: UserResponse;
+}
+const { user } = Astro.props;
+---
+
+<style>
+  .content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 16px;
+  }
+
+  .user-eyecatch {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .user-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .user-description {
+    padding: 8px 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: #575860;
+  }
+
+  .user-sns {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    color: #575860;
+    padding-right: 16px;
+    gap: 4px;
+  }
+</style>
+
+<section class="content">
+  <img
+    alt=""
+    width="64"
+    height="64"
+    loading="lazy"
+    class="user-eyecatch"
+    src={getOptimizedUrl({
+      url: user.eyecatch.url,
+      size: {
+        height: 64,
+        width: 64,
+      },
+    })}
+  />
+  <div class="user-info">
+    <span class="user-name">{user.name}</span>
+    <p class="user-description">{user.description}</p>
+    <a
+      class="user-sns"
+      href={`https://github.com/${user.github}`}
+      target="_blank"
+    >
+      <GitHubSvgIcon title="GitHub Icon" />
+      <span>{user.github}</span>
+    </a>
+    <a
+      class="user-sns"
+      href={`https://twitter.com/${user.twitter}`}
+      target="_blank"
+    >
+      <TwitterSvgIcon title="Twitter Icon" />
+      <span>{user.twitter}</span>
+    </a>
+    <a
+      class="user-sns"
+      href={`https://cut0-portfolio.vercel.app`}
+      target="_blank"
+    >
+      <WebSvgIcon title="Web Icon" />
+      <span>Portfolio</span>
+    </a>
+  </div>
+</section>

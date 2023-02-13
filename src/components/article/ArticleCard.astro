@@ -1,0 +1,148 @@
+---
+import type { ArticleResponse } from "../../../api-client";
+import { formatDate } from "../../utils/date";
+import { getOptimizedUrl } from "../../utils/imageUrl";
+
+interface Props {
+  article: ArticleResponse;
+}
+const { article } = Astro.props;
+
+const publishedAt = formatDate(article.publishedAt!, "YYYY年M月D日");
+---
+
+<style>
+  .card {
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 10px -4px #c6c8ca;
+    color: #2b2b2e;
+    display: block;
+  }
+
+  .card:hover {
+    transform: scale(1.05, 1.05);
+    color: #0061d3;
+  }
+
+  .card:focus {
+    transform: scale(1.05, 1.05);
+    color: #0061d3;
+  }
+
+  .eyecatch-container {
+    height: 162px;
+    position: relative;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .eyecatch {
+    background-color: #939ca3;
+    border-radius: 16px 16px 0 0;
+    object-fit: cover;
+  }
+
+  .article-info-container {
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .article-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .article-tag-list-container {
+    padding: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
+    height: 74px;
+  }
+
+  .article-tag {
+    font-size: 0.875rem;
+    color: #0061d3;
+    padding-right: 8px;
+  }
+
+  .user-info-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .user-eyecatch-container {
+    height: 36px;
+    width: 36px;
+    position: relative;
+  }
+
+  .user-eyecatch {
+    border-radius: 50%;
+    background-color: #939ca3;
+    object-fit: cover;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+  }
+
+  .user-name {
+    font-size: 0.875rem;
+  }
+
+  .published-at {
+    font-size: 0.75rem;
+  }
+</style>
+
+<a class="card" href={`/${article.id}`}>
+  <div class="eyecatch-container">
+    <img
+      class="eyecatch"
+      height="162"
+      width="288"
+      alt=""
+      src={getOptimizedUrl({
+        url: article.eyecatch.url,
+        size: { width: 162, height: 288 },
+      })}
+      loading="lazy"
+    />
+  </div>
+  <div class="article-info-container">
+    <p class="article-title">{article.title}</p>
+    <div class="article-tag-list-container">
+      {
+        article.tags.map((tag) => {
+          return <span class="article-tag">#{tag.name}</span>;
+        })
+      }
+    </div>
+    <div class="user-info-container">
+      <div class="user-eyecatch-container">
+        <img
+          alt=""
+          class="user-eyecatch"
+          width="36"
+          height="36"
+          loading="lazy"
+          src={getOptimizedUrl({
+            url: article.users[0]?.eyecatch.url || "",
+            size: { width: 36, height: 36 },
+          })}
+        />
+      </div>
+      <div class="user-info">
+        <span class="user-name">{article.users[0]?.name}</span>
+        <time class="published-at">{publishedAt}投稿</time>
+      </div>
+    </div>
+  </div>
+</a>

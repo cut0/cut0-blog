@@ -12,7 +12,7 @@ export const createArticleFilter = ({
   if (tagId) {
     filterStrList.push(`(tags[contains]${tagId})`);
   }
-  if (process.env.NODE_ENV === "production") {
+  if (import.meta.env.MODE === "production") {
     filterStrList.push("(isPublic[equals]true)");
   }
   return filterStrList.join("[and]");

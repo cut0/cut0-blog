@@ -1,8 +1,10 @@
 import { client } from "../plugins/client";
-import { MicroCMSGETListModel, MicroCMSGETModel } from "../types";
-import { ArticleResponse } from "./types";
+import type { MicroCMSGETListModel, MicroCMSGETModel } from "../types";
+import type { ArticleResponse } from "./types";
 
-const GET_BLOG_CONTENT_LIST_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getArticleList`;
+const GET_BLOG_CONTENT_LIST_KEY = `${
+  import.meta.env.PUBLIC_END_POINT
+}/getArticleList`;
 
 export const getArticleList: MicroCMSGETListModel<ArticleResponse[]> = {
   key: GET_BLOG_CONTENT_LIST_KEY,
@@ -15,7 +17,7 @@ export const getArticleList: MicroCMSGETListModel<ArticleResponse[]> = {
   },
 };
 
-const GET_BLOG_CONTENT_KEY = `${process.env.NEXT_PUBLIC_END_POINT}/getArticle`;
+const GET_BLOG_CONTENT_KEY = `${import.meta.env.PUBLIC_END_POINT}/getArticle`;
 
 export const getArticle: MicroCMSGETModel<ArticleResponse> = {
   key: GET_BLOG_CONTENT_KEY,

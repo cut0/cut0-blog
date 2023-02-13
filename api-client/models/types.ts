@@ -1,4 +1,4 @@
-import { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
+import type { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
 
 type MicroCMSDefalut = MicroCMSContentId & MicroCMSDate;
 
