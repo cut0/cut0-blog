@@ -76,7 +76,6 @@ const imgHeight = pageImgHeight ?? 640;
     <script src="https://embed.zenn.studio/js/listen-embed-event.js" async defer
     ></script>
     <script src="/registerServiceWorker.js" async defer></script>
-
     <script
       src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       type="text/partytown"
@@ -85,7 +84,7 @@ const imgHeight = pageImgHeight ?? 640;
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
-        dataLayer.push(arguments);
+        window.dataLayer.push(arguments);
       }
       gtag("js", new Date());
       gtag("config", "${GA_ID}", { page_path: window.location.pathname });
