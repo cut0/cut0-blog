@@ -16,7 +16,9 @@ const main = async () => {
 
   const articleList = data.contents.map((article) => ({
     ...article,
-    body: m2h.default(article.body),
+    body: m2h.default(article.body, {
+      embedOrigin: "https://embed.zenn.studio",
+    }),
   }));
 
   if (!fs.existsSync(DIR)) {
