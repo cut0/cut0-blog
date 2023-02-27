@@ -20,9 +20,8 @@
     "microcms-js-sdk": "^2.0.0",
     "prismjs": "^1.29.0",
     "sanitize.css": "^13.0.0",
-    "zenn-content-css": "^0.1.137",
-    "zenn-embed-elements": "^0.1.137",
-    "zenn-markdown-html": "^0.1.137"
+    "zenn-content-css": "0.1.141",
+    "zenn-markdown-html": "0.1.141"
   },
   "devDependencies": {
     "@astrojs/partytown": "^1.0.3",
