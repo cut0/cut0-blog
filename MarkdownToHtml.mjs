@@ -1,12 +1,17 @@
-const path = require("path");
-const fs = require("fs");
+import path from "path";
+import fs from "fs";
+import m2h from "zenn-markdown-html";
+import { createClient } from "microcms-js-sdk";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
 
-const m2h = require("zenn-markdown-html");
-const { createClient } = require("microcms-js-sdk");
+dotenv.config();
 
-require("dotenv").config();
+const __filename = fileURLToPath(import.meta.url);
 
-const DIR = path.join(__dirname, "article-raws");
+const __dirname = path.dirname(__filename);
+
+const OUTPUT_DIR = path.join(__dirname, "article-raws");
 
 const main = async () => {
   const data = await createClient({
@@ -21,16 +26,16 @@ const main = async () => {
     }),
   }));
 
-  if (!fs.existsSync(DIR)) {
-    fs.mkdirSync(DIR);
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
   }
 
   fs.writeFile(
-    path.join(DIR, "out.json"),
+    path.join(OUTPUT_DIR, "out.json"),
     JSON.stringify({ data: articleList }),
     (err, data) => {
       if (err) console.error(err);
-      else console.log("write end");
+      else console.log("write completed");
     },
   );
 };

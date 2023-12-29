@@ -11,7 +11,6 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-    "importsNotUsedAsValues": "error",
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -21,5 +20,6 @@
     "exactOptionalPropertyTypes": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false
-  }
+  },
+  "include": ["index.d.ts"]
 }
