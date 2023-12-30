@@ -2,5 +2,12 @@
   "bracketSpacing": true,
   "semi": true,
   "trailingComma": "all",
-  "useTabs": false
+  "useTabs": false,
+  "plugins": ["prettier-plugin-astro"],
+  "overrides": [
+    {
+      "files": "**/*.astro",
+      "options": { "parser": "astro" }
+    }
+  ]
 }

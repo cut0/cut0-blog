@@ -5,13 +5,7 @@
   "scripts": {
     "dev": "node ./MarkdownToHtml.mjs && astro dev",
     "build": "node ./MarkdownToHtml.mjs && astro check && astro build",
-    "preview": "node ./MarkdownToHtml.mjs && astro preview",
-    "lint": "run-s lint:eslint lint:prettier",
-    "lint:eslint": "eslint --ext ts,tsx,js,astro ./src",
-    "lint:prettier": "prettier --ignore-path .prettierignore  --check '**/*.{js,ts,tsx,css,astro}'",
-    "format": "run-s format:eslint format:prettier",
-    "format:eslint": "eslint --fix --ext ts,tsx,js,astro .",
-    "format:prettier": "prettier --ignore-path .prettierignore  --write '**/*.{js,ts,tsx,css,astro}'"
+    "preview": "node ./MarkdownToHtml.mjs && astro preview"
   },
   "dependencies": {
     "astro": "^4.0.8",
