@@ -3,6 +3,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default {
+  outDir: "../../dist",
   plugins: [],
   integrations: [
     // compress(),
