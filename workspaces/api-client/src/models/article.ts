@@ -38,8 +38,8 @@ const GET_BLOG_CONTENT_MARKED_LIST_KEY = `${
 export const getMarkedArticleList: MicroCMSGETListModel<ArticleResponse[]> = {
   key: GET_BLOG_CONTENT_MARKED_LIST_KEY,
   handler: async () => {
-    const data = (await import("../../dist/out.json"))
-      .data as ArticleResponse[];
+    //ts-ignore
+    const data = (await import("../out.json")).data as ArticleResponse[];
     return data;
   },
 };
