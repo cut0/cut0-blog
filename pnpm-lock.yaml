@@ -98,9 +98,6 @@ importers:
       astro-compress:
         specifier: ^2.2.5
         version: 2.2.5
-      dotenv:
-        specifier: ^16.0.3
-        version: 16.0.3
 
   workspaces/server:
     dependencies:
@@ -110,10 +107,6 @@ importers:
       hono:
         specifier: ^3.11.11
         version: 3.11.11
-    devDependencies:
-      dotenv:
-        specifier: ^16.0.3
-        version: 16.0.3
 
 packages:
 
