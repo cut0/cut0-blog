@@ -1,0 +1,21 @@
+{
+  "name": "@cut0-blog/api-client",
+  "version": "0.1.0",
+  "private": true,
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node ./scripts/MarkdownToHtml.mjs && node ./scripts/Build.mjs && tsc --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "esbuild": "^0.19.11",
+    "zenn-markdown-html": "0.1.141"
+  },
+  "dependencies": {
+    "microcms-js-sdk": "^2.0.0"
+  }
+}

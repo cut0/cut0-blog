@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
-const OUTPUT_DIR = path.join(__dirname, "article-raws");
+const OUTPUT_DIR = path.join(__dirname, "../dist");
 
 const main = async () => {
   const data = await createClient({

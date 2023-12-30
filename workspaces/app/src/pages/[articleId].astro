@@ -1,11 +1,12 @@
 ---
+import { getMarkedArticleList } from "../../../api-client/dist";
 import Header from "../components/common/Header.astro";
 import ArticleLayout from "../layouts/ArticleLayout.astro";
 import ArticleTemplate from "../templates/ArticleTemplate.astro";
 
 export async function getStaticPaths() {
-  const articleList = await import("../../article-raws/out.json");
-  return articleList.data.map((article) => {
+  const articleList = await getMarkedArticleList.handler({});
+  return articleList.map((article) => {
     return {
       params: {
         articleId: article.id,

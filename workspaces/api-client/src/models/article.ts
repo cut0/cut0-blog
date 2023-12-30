@@ -30,3 +30,16 @@ export const getArticle: MicroCMSGETModel<ArticleResponse> = {
     return data;
   },
 };
+
+const GET_BLOG_CONTENT_MARKED_LIST_KEY = `${
+  import.meta.env.PUBLIC_END_POINT
+}/getMarkedArticleList`;
+
+export const getMarkedArticleList: MicroCMSGETListModel<ArticleResponse[]> = {
+  key: GET_BLOG_CONTENT_MARKED_LIST_KEY,
+  handler: async () => {
+    const data = (await import("../../dist/out.json"))
+      .data as ArticleResponse[];
+    return data;
+  },
+};

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./MarkdownToHtml.mjs && astro dev",
-    "build": "node ./MarkdownToHtml.mjs && astro check && astro build",
-    "preview": "node ./MarkdownToHtml.mjs && astro preview"
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
   },
   "dependencies": {
     "astro": "^4.0.8",
@@ -14,7 +14,8 @@
     "prismjs": "^1.29.0",
     "sanitize.css": "^13.0.0",
     "zenn-content-css": "0.1.141",
-    "zenn-markdown-html": "0.1.141"
+    "zenn-markdown-html": "0.1.141",
+    "@cut0-blog/api-client": "0.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.3.4",
