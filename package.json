@@ -13,7 +13,9 @@
     "format:eslint": "eslint --fix --ext ts,tsx,js,astro .",
     "format:prettier": "prettier --ignore-path .prettierignore  --write '**/*.{js,ts,tsx,css,astro}'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tsx": "^4.7.0"
+  },
   "devDependencies": {
     "@types/node": "17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
