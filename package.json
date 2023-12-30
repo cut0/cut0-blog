@@ -6,6 +6,7 @@
     "dev": "pnpm -C workspaces/app dev",
     "build": "pnpm -C workspaces/app build",
     "preview": "pnpm -C workspaces/app preview",
+    "start": "pnpm -C workspaces/server serve",
     "lint": "run-s lint:eslint lint:prettier",
     "lint:eslint": "eslint --ext ts,tsx,js,astro ./",
     "lint:prettier": "prettier --ignore-path .prettierignore  --check '**/*.{js,ts,tsx,css,astro}'",
