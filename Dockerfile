@@ -14,8 +14,8 @@ RUN --mount=type=cache,id=runner_deps,target=/root/.pnpm-store \
   pnpm config set store-dir /root/.pnpm-store && \
   pnpm i --frozen-lockfile
 
-ENV PORT 3000
+ENV PORT 8080
 
-EXPOSE 3000
+EXPOSE 8080
 ENTRYPOINT ["pnpm"]
 CMD ["start"]
