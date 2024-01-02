@@ -8,7 +8,6 @@ env:
   PROJECT_ID: cut0-blog
   REPOSITORY_NAME: cut0-blog-images
   IMAGE_NAME: cut0-blog
-  GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
 
 jobs:
   setup:
@@ -71,8 +70,14 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Install Deps
         run: pnpm install --frozen-lockfile
+      - name: Setup env
+        run: |-
+          echo "PUBLIC_GA_ID=${{ secrets.GA_TRACKING_ID }}" >> $GITHUB_ENV
+          echo "PUBLIC_END_POINT=${{ secrets.PUBLIC_END_POINT }}" >> $GITHUB_ENV
+          echo "PUBLIC_SERVICE_DOMAIN=${{ secrets.PUBLIC_SERVICE_DOMAIN }}" >> $GITHUB_ENV
+          echo "PUBLIC_API_KEY=${{ secrets.PUBLIC_API_KEY }}" >> $GITHUB_ENV
       - name: Build App
-        run: PUBLIC_GA_ID=${GA_TRACKING_ID} pnpm build
+        run: pnpm build
       - uses: ./.github/actions/setup-gcloud
         with:
           credentials_json: ${{ secrets.CREDENTIALS_JSON }}
