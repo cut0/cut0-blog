@@ -6,6 +6,9 @@
     "release": "semantic-release"
   },
   "dependencies": {
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/github": "^9.2.6",
     "semantic-release": "^22.0.12"
   }
 }
