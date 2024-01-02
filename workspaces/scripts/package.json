@@ -1,0 +1,11 @@
+{
+  "name": "scripts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "release": "semantic-release"
+  },
+  "dependencies": {
+    "semantic-release": "^22.0.12"
+  }
+}

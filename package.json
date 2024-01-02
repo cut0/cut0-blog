@@ -12,7 +12,9 @@
     "lint:prettier": "prettier --ignore-path .prettierignore  --check '**/*.{js,ts,tsx,css,astro}'",
     "format": "run-s format:eslint format:prettier",
     "format:eslint": "eslint --fix --ext ts,tsx,js,astro .",
-    "format:prettier": "prettier --ignore-path .prettierignore  --write '**/*.{js,ts,tsx,css,astro}'"
+    "format:prettier": "prettier --ignore-path .prettierignore  --write '**/*.{js,ts,tsx,css,astro}'",
+    "typecheck": "pnpm -C workspaces/app typecheck",
+    "release": "pnpm -C workspaces/scripts release"
   },
   "dependencies": {
     "tsx": "^4.7.0"
