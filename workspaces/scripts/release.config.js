@@ -24,7 +24,7 @@ module.exports = {
       "@semantic-release/exec",
       {
         successCmd:
-          "docker buildx build -t ${process.env.IMAGE}:${nextRelease.version} --push .",
+          "docker buildx build -t ${process.env.IMAGE}:${nextRelease.version} --push ../../",
       },
     ],
     [
