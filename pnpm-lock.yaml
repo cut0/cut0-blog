@@ -99,8 +99,6 @@ importers:
         specifier: ^2.2.5
         version: 2.2.5
 
-  workspaces/ops: {}
-
   workspaces/scripts:
     dependencies:
       '@semantic-release/commit-analyzer':

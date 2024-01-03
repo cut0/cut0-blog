@@ -81,7 +81,8 @@ const { articleList, category } = Astro.props;
     >
     <a
       class:list={["nav-link-element", { selected: category === "pick-up" }]}
-      href="/pick-up">Pick Up</a
+      href="/pick-up"
+      data-astro-prefetch="viewport">Pick Up</a
     >
   </div>
 </nav>

@@ -1,4 +1,4 @@
-// import compress from "astro-compress";
+import compress from "astro-compress";
 import partytown from "@astrojs/partytown";
 import node from "@astrojs/node";
 
@@ -9,14 +9,15 @@ export default {
   adapter: node({
     mode: "middleware",
   }),
+  prefetch: true,
   plugins: [],
   integrations: [
-    // compress(),
     partytown({
       // Adds dataLayer.push as a forwarding-event.
       config: {
         forward: ["dataLayer.push"],
       },
     }),
+    compress(),
   ],
 };

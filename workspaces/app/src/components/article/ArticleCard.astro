@@ -102,7 +102,7 @@ const publishedAt = formatDate(article.publishedAt!, "YYYY年M月D日");
   }
 </style>
 
-<a class="card" href={`/${article.id}`}>
+<a class="card" href={`/${article.id}`} data-astro-prefetch="viewport">
   <div class="eyecatch-container">
     <img
       class="eyecatch"
