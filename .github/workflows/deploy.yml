@@ -1,0 +1,34 @@
+name: Deploy Production
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: "Enter a Rollout Version"
+        required: true
+        default: "1.0.0"
+
+jobs:
+  deploy_production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-gcloud
+        with:
+          credentials_json: ${{ secrets.CREDENTIALS_JSON }}
+      - name: Rollout Version
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: cut0-blog
+          region: asia-northeast1
+          image: "asia-northeast1-docker.pkg.dev/cut0-blog/cut0-blog-images/cut0-blog:${{ github.event.inputs.number }}"
+
+  purge_firebase_hosting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CUT0_BLOG }}"
+          channelId: live
+          projectId: cut0-blog
