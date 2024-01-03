@@ -8,6 +8,17 @@ const app = new Hono();
 
 app.use(
   "*",
+  async (c, next) => {
+    await next();
+    // const path = c.req.path;
+    // if (/\.(html|css|js|png|jpg)$/.test(path)) {
+    // Cache-Control ヘッダーを設定
+    // }
+    c.res.headers.append(
+      "Cache-Control",
+      "public, max-age=300, s-max-age=86400",
+    );
+  },
   serveStatic({
     root: "../../dist",
   }),
