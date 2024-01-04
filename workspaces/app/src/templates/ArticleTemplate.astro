@@ -14,7 +14,7 @@ const publishedAt = formatDate(article.publishedAt || "");
 
 <style>
   .article-wrapper {
-    background-color: #eaeaea;
+    background-color: #f4f5f8;
     min-height: calc(100vh - 52px);
   }
 
@@ -25,9 +25,8 @@ const publishedAt = formatDate(article.publishedAt || "");
   }
 
   .article {
-    border-radius: 16px;
     background-color: #ffffff;
-    padding: 16px;
+    padding: 12px 16px;
   }
 
   .article-title-container {
@@ -57,9 +56,10 @@ const publishedAt = formatDate(article.publishedAt || "");
     top: 0;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1080px) {
     .article {
-      padding: 32px;
+      padding: 20px 32px;
+      border-radius: 16px;
     }
   }
 </style>
