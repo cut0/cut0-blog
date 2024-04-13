@@ -1,0 +1,19 @@
+name: Update Content
+on:
+  workflow_dispatch:
+
+jobs:
+  commit_changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Commit Empty Message
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "feat: update content" --allow-empty
+          git push
