@@ -1,7 +1,6 @@
 ---
-import { getArticleList, getTagList } from "@cut0-blog/api-client";
-import { createArticleFilter } from "../modules/article/articleFilter";
-import { createTagFilter } from "../modules/tag/tagFilter";
+import { getArticleList } from "@cut0-blog/api-client";
+import { createArticleFilter } from "../features/articles/utils";
 import Header from "../components/common/Header.astro";
 import HomeLayout from "../layouts/HomeLayout.astro";
 import HomeTemplate from "../templates/HomeTemplate.astro";
@@ -9,9 +8,6 @@ import HomeTemplate from "../templates/HomeTemplate.astro";
 const [articleList] = await Promise.all([
   getArticleList.handler({
     filters: createArticleFilter({ category: "recently" }),
-  }),
-  getTagList.handler({
-    filters: createTagFilter(),
   }),
 ]);
 ---

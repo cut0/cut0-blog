@@ -1,6 +1,5 @@
 {
-  "name": "scripts",
-  "version": "0.1.0",
+  "name": "@cut0-blog/scripts",
   "private": true,
   "scripts": {
     "release": "semantic-release"

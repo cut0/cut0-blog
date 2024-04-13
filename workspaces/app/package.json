@@ -1,6 +1,5 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "@cut0-blog/app",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -9,14 +8,13 @@
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
+    "@cut0-blog/api-client": "workspace:*",
     "astro": "^4.0.8",
     "dayjs": "^1.11.5",
-    "microcms-js-sdk": "^2.0.0",
     "prismjs": "^1.29.0",
     "sanitize.css": "^13.0.0",
-    "zenn-content-css": "0.1.141",
-    "zenn-markdown-html": "0.1.141",
-    "@cut0-blog/api-client": "0.1.0"
+    "zenn-content-css": "0.1.153",
+    "zenn-markdown-html": "0.1.153"
   },
   "devDependencies": {
     "@astrojs/check": "^0.3.4",
