@@ -8,7 +8,7 @@ import m2h from "zenn-markdown-html";
 export async function getStaticPaths() {
   const articleList = (await getArticleList.handler({})).map((article) => ({
     ...article,
-    // @ts-ignore ライブラリ側で型定義バグ
+    // @ts-expect-error ライブラリ側で型定義バグ
     body: m2h.default(article.body, {
       embedOrigin: "https://embed.zenn.studio",
     }),
