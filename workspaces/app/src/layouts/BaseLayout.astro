@@ -4,6 +4,7 @@ import "sanitize.css/forms.css";
 import "sanitize.css/typography.css";
 import "../styles/global.css";
 import { GA_ID } from "../utils/constants";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   ogp: {
@@ -90,7 +91,9 @@ const imgHeight = pageImgHeight ?? 640;
       gtag("js", new Date());
       gtag("config", gaId, { page_path: window.location.pathname });
     </script>
+    <ViewTransitions />
   </head>
-</html><body>
-  <slot />
-</body>
+  <body>
+    <slot />
+  </body>
+</html>
