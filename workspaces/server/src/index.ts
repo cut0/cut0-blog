@@ -6,15 +6,24 @@ const port = parseInt(process.env.PORT ?? "3000");
 
 const app = new Hono();
 
-app.get("*", async (c) => {
-  if (c.req.url === "https://cut0-blog.vercel.app") {
-    const url = new URL(c.req.url);
+app.get("*", async (c, next) => {
+  const legacyHostList = [
+    "cut0-blog.vercel.app",
+    "cut0-blog.web.app",
+    "cut0-blog.firebaseapp.com",
+  ];
 
-    const newHostname = "cut0.blog.app";
+  const url = new URL(c.req.url);
+
+  if (legacyHostList.includes(url.hostname)) {
+    const newHostname = "blog.cut0.app";
     url.hostname = newHostname;
 
-    c.redirect(url.toString(), 301);
+    return c.redirect(url.toString(), 301);
   }
+  await next();
+
+  return;
 });
 
 app.use(

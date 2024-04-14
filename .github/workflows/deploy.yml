@@ -21,16 +21,3 @@ jobs:
           service: cut0-blog
           region: asia-northeast1
           image: "asia-northeast1-docker.pkg.dev/cut0-blog/cut0-blog-images/cut0-blog:${{ github.event.inputs.number }}"
-
-  purge_firebase_hosting:
-    needs:
-      - deploy_production
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CUT0_BLOG }}"
-          channelId: live
-          projectId: cut0-blog
