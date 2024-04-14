@@ -16,7 +16,7 @@ app.use(
     // }
     c.res.headers.append(
       "Cache-Control",
-      "public, max-age=300, s-max-age=86400",
+      "public, max-age=300, s-maxage=86400",
     );
   },
   serveStatic({
