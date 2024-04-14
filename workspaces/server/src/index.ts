@@ -6,14 +6,22 @@ const port = parseInt(process.env.PORT ?? "3000");
 
 const app = new Hono();
 
+app.get("*", async (c) => {
+  if (c.req.url === "https://cut0-blog.vercel.app") {
+    const url = new URL(c.req.url);
+
+    const newHostname = "cut0.blog.app";
+    url.hostname = newHostname;
+
+    c.redirect(url.toString(), 301);
+  }
+});
+
 app.use(
   "*",
   async (c, next) => {
     await next();
-    // const path = c.req.path;
-    // if (/\.(html|css|js|png|jpg)$/.test(path)) {
-    // Cache-Control ヘッダーを設定
-    // }
+
     c.res.headers.append(
       "Cache-Control",
       "public, max-age=300, s-maxage=86400",
@@ -25,5 +33,5 @@ app.use(
 );
 
 serve({ fetch: app.fetch, port }, () => {
-  console.log(`slistening on http://localhost:${port}/`);
+  console.log(`listening on http://localhost:${port}/`);
 });
