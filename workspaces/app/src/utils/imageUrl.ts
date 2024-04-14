@@ -4,5 +4,5 @@ type Props = {
 };
 
 export const getOptimizedUrl = ({ url, size }: Props) => {
-  return `${url}?w=${size.width * 2}&h=${size.height * 2}&fm=webp`;
+  return `${url}?w=${size.width}&h=${size.height}&fm=webp&dpr=2`;
 };

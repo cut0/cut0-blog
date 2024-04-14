@@ -8,7 +8,7 @@ import type {
 import { TagResponse } from "./tag";
 import { UserResponse } from "./user";
 
-type ArticleResponse = MicroCmsContent<{
+export type ArticleResponse = MicroCmsContent<{
   description: string;
   title: string;
   body: string;

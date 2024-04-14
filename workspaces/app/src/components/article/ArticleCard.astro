@@ -1,8 +1,7 @@
 ---
-import type { ArticleResponse } from "@cut0-blog/api-client";
 import { formatDate } from "../../utils/date";
 import { getOptimizedUrl } from "../../utils/imageUrl";
-
+import { ArticleResponse } from "@cut0-blog/api-client";
 interface Props {
   article: ArticleResponse;
 }
@@ -111,7 +110,7 @@ const publishedAt = formatDate(article.publishedAt!, "YYYY年M月D日");
       alt=""
       src={getOptimizedUrl({
         url: article.eyecatch.url,
-        size: { height: 324, width: 688 },
+        size: { height: 162, width: 344 },
       })}
       loading="lazy"
     />
