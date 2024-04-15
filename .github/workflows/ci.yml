@@ -5,7 +5,7 @@ on:
       - "**"
 
 env:
-  PROJECT_ID: cut0-blog
+  PROJECT_ID: cut0-blog-v2
   REPOSITORY_NAME: cut0-blog-images
   IMAGE_NAME: cut0-blog
 
