@@ -20,4 +20,4 @@ jobs:
         with:
           service: cut0-blog
           region: asia-northeast1
-          image: "asia-northeast1-docker.pkg.dev/cut0-blog/cut0-blog-images/cut0-blog:${{ github.event.inputs.number }}"
+          image: "asia-northeast1-docker.pkg.dev/cut0-blog-v2/cut0-blog-images/cut0-blog:${{ github.event.inputs.number }}"
