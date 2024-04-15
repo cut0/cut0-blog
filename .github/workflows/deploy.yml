@@ -7,11 +7,6 @@ on:
         required: true
         default: "1.0.0"
 
-env:
-  PROJECT_ID: cut0-blog-v2
-  REPOSITORY_NAME: cut0-blog-images
-  IMAGE_NAME: cut0-blog
-
 jobs:
   deploy_production:
     runs-on: ubuntu-latest
@@ -25,4 +20,4 @@ jobs:
         with:
           service: cut0-blog
           region: asia-northeast1
-          image: "asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY_NAME}/${IMAGE_NAME}:${{ github.event.inputs.number }}"
+          image: "asia-northeast1-docker.pkg.dev/cut0-blog/cut0-blog-images/cut0-blog:${{ github.event.inputs.number }}"
